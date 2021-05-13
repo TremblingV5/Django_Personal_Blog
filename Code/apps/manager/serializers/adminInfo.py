@@ -1,5 +1,6 @@
 from apps.manager.models import AdminUser
 from rest_framework import serializers
+from utils.hasher import get_md5
 
 
 class AdminUserSerializer(serializers.ModelSerializer):
@@ -15,6 +16,7 @@ class AdminUserSerializer(serializers.ModelSerializer):
         # FIXED: 不需要在此处删除
         # del attrs['passwordAgain']
         # del attrs['validate']
+        attrs['password'] = get_md5(attrs['password'])
         return attrs
 
     def create(self, validated_data):

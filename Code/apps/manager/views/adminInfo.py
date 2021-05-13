@@ -22,6 +22,12 @@ class AdminInfoApi(AbstractApiView):
         code = 200
         message = "Success"
 
+        if requests.data.get('password') != requests.data.get('passwordAgain'):
+            raise Exception("密码输入不一致")
+
+        if requests.data.get('password') == "":
+            raise Exception("密码输入为空")
+
         exists = AdminUser.objects.filter(username=requests.POST.get('username'))
 
         res = AdminUserSerializer(data=requests.data, many=False)
@@ -31,6 +37,7 @@ class AdminInfoApi(AbstractApiView):
                 res.create(res.data)
             else:
                 res.update(exists[0], res.data)
+
         return {
             "code": code,
             "message": message,

@@ -24,7 +24,7 @@ class LoginApi(APIView):
 
         item = AdminUser.objects.filter(username=requests.POST.get('username'))
         if len(item) > 0:
-            password = get_md5(item[0].password)
+            password = item[0].password
             if password == requests.POST.get('password'):
                 code = 200
             else:
