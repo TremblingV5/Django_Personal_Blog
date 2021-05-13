@@ -1,0 +1,181 @@
+{% extends 'manage/base.html' %}
+{% block sidebar %}
+<li class="treeview">
+    <a href="{% url 'adminInfo' %}">
+        <i class="fa fa-lock"></i>
+        <span>账户管理</span>
+    </a>
+</li>
+<li class="treeview active">
+    <a href="#">
+        <i class="fa fa-bookmark"></i>
+        <span>简历管理</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li class="active"><a href="{% url 'resumeInfo' %}"><i class="fa fa-circle-o"></i>基本信息</a></li>
+        <li><a href="{% url 'expResume' %}"><i class="fa fa-circle-o"></i>经历</a></li>
+        <li><a href="{% url 'stackInfo' %}"><i class="fa fa-circle-o"></i>技术栈</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-briefcase"></i>
+        <span>博客管理</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{% url 'blogAboutMe' %}"><i class="fa fa-circle-o"></i>个人自述</a></li>
+        <li><a href="{% url 'articleCategory' %}"><i class="fa fa-circle-o"></i>文章分类</a></li>
+        <li><a href="{% url 'articles' %}"><i class="fa fa-circle-o"></i>文章管理</a></li>
+    </ul>
+</li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-folder-open"></i>
+        <span>信息管理</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="{% url 'contactInfo' %}"><i class="fa fa-circle-o"></i>信息管理</a></li>
+    </ul>
+</li>
+{% endblock sidebar %}
+{% block pageName %}简历管理{% endblock pageName %}
+{% block breadCrumb %}
+<ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i>后台管理</a></li>
+    <li class="active">简历管理</li>
+    <li class="active">基本信息</li>
+</ol>
+{% endblock breadCrumb %}
+{% block content %}
+
+<section class="col-lg-12 connectedSortable">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">简历基本信息管理</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <form action="" method="post" class="form-inline">
+                <div class="box-header">
+                    <div class="input-group">
+                        <a class="btn btn-primary dialog layui-btn" href="javascript:;"
+                           data-url=""  data-method="edit" data-title="添加信息" data-width="850"
+                           data-height="400"
+                           onclick="layer.open({
+                              type: 2,
+                              title: '新建',
+                              shadeClose: true,
+                              skin: 'skin-blue',
+                              shade: [0.6, '#393D49'],
+                              area: ['50%', '50%'],
+                              maxmin: true,
+                              shadeClose: false,
+                              content: '{% url 'addResumeInfo' %}',
+                              cancel: function(){location.reload();}
+                            });"><i class="fa fa-plus"></i>添加信息</a>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="search" value="" class="form-control"
+                               placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i
+                                    class="fa fa-search"></i></button>
+                            <a href="/system/role/list/1" class="btn btn-default"><i
+                                    class="fa fa-refresh"></i></a>
+                        </div>
+                    </div>
+                    <div class="input-group pull-right">
+                        <button type="button" class="btn btn-primary btn-flat"
+                                onclick="exportTo('角色数据');"><i class="fa fa-file-excel-o"></i> 导出</button>
+                    </div>
+                </div><!-- /.box-header -->
+            </form>
+            <table id="example2" class="table table-bordered table-hover text-center">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>意向职位</th>
+                    <th>个人介绍</th>
+                    <th>生日</th>
+                    <th>手机号</th>
+                    <th>邮箱</th>
+                    <th>网站</th>
+                    <th>地址</th>
+                    <th>照片</th>
+                    <th>是否展示</th>
+                    <th>功能</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.introduction }}</td>
+                    <td>{{ item.birthday | date:'Y-m-d' }}</td>
+                    <td>{{ item.mobile }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.website }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.personalImage }}</td>
+                    <td>
+                        {% if item.is_using %}
+                        <i class="glyphicon glyphicon-ok text-green"></i>
+                        {% else %}
+                        <i class="glyphicon glyphicon-remove text-red"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="javascript:;" class="layui-btn layui-btn-normal"
+                           onclick="layer.open({
+                              type: 2,
+                              title: '修改',
+                              shadeClose: true,
+                              skin: 'skin-blue',
+                              shade: [0.6, '#393D49'],
+                              area: ['50%', '50%'],
+                              maxmin: true,
+                              shadeClose: false,
+                              content: '{% url 'addResumeInfo' %}?id={{ item.id }}',
+                              cancel: function(){location.reload();}
+                            });">
+                            修改
+                        </a>
+                        <a href="javascript:;" class="layui-btn layui-btn-danger" onclick="deleteBasicInfo({{ item.id }})">
+                            删除
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</section>
+{% endblock content %}
+{% block js %}
+<script>
+    function deleteBasicInfo(id){
+        $.ajax({
+            url: "{% url 'addResumeInfo' %}",
+            data: {
+                'id': id
+            },
+            method: "delete",
+            success:function(result){
+                location.reload();
+            }
+        });
+    }
+</script>
+{% endblock js %}

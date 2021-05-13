@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	{% load static %}
+	<title>zhengfei.xin</title>
+	<meta name="viewport" content="width=600" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="format-detection" content="telephone=no" />
+
+	<link rel="stylesheet" type="text/css" href="{%static 'css/fonts_ubuntu_300_700.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.3/example1/colorbox.css" />
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+	<!--    <link rel="apple-touch-icon" href="apple-touch-icon.png" />-->
+	<!--    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />-->
+</head>
+<body class="fg-orange-strong">
+<!--*** Loading animated ***-->
+<div class="loading-panel">
+	<div class="loading">
+		<div id="loading-gif"></div>
+	</div>
+</div>
+
+<!--*** Menu ***-->
+<div class="container-menu">
+	<nav class="mainmenu">
+		<ul>
+			<li>
+				<a class="fg-bgc" href="#profile">
+					<span class="img-menu" id="about-ico"></span>
+					<span class="txt-menu">About Me</span>
+				</a>
+			</li>
+			<li>
+				<a class="fg-bgc" href="#resume">
+					<span class="img-menu" id="resume-ico"></span>
+					<span class="txt-menu">Resume</span>
+				</a>
+			</li>
+			<li>
+				<a class="fg-bgc" href="#portfolio">
+					<span class="img-menu" id="portfolio-ico"></span>
+					<span class="txt-menu">Articles</span>
+				</a>
+			</li>
+			<li>
+				<a class="fg-bgc" href="#contact">
+					<span class="img-menu" id="contact-ico"></span>
+					<span class="txt-menu">Contact Me</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<!--*** Pages ***-->
+<div id="impress">
+	<!--*** Profile ***-->
+	<section class="profile_container cover step" id="profile" data-x="0" data-y="0">
+		<h1 class="cover"><span class="h1-text fg-bgc">About Me</span><span class="h1-corner fg-bdc"></span></h1>
+		<figure class="me left">
+			<div id="myqr">Scan My QR Code</div>
+			<div id="myimg"></div>
+		</figure>
+		<section class="personal-info right">
+			<!-- Personal info section -->
+			<ul>
+				<li>
+					<div class="label fg-bgc">Name</div>
+					<div class="corner fg-bdc"></div>
+					<div class="text">{{ data.about.name }}</div>
+				</li>
+				<li>
+					<div class="label fg-bgc">Birthday</div>
+					<div class="corner fg-bdc"></div>
+					<div class="text">{{ data.about.birthday }}</div>
+				</li>
+				<li>
+					<div class="label fg-bgc">Phone</div>
+					<div class="corner fg-bdc"></div>
+					<div class="text">{{ data.about.mobile }}</div>
+				</li>
+				<li>
+					<div class="label fg-bgc">Email</div>
+					<div class="corner fg-bdc"></div>
+					<div class="text"><a href="mailto:{{ data.about.email }}">{{ data.about.email }}</a></div>
+				</li>
+				<li>
+					<div class="label fg-bgc">Website</div>
+					<div class="corner fg-bdc"></div>
+					<div class="text"><a href="{{ data.about.website }}" target="_blank">{{ data.about.website }}</a></div>
+				</li>
+				<li>
+					<div class="label fg-bgc">Address</div>
+					<div class="corner fg-bdc"></div>
+					<div class="text">{{ data.about.address }}</div>
+				</li>
+			</ul>
+		</section>
+		<section class="aboutme">
+			<hgroup>
+				<h2 class="f30">{{ data.about.name }}</h2>
+				<h2 class="f20">{{ data.about.title }}</h2>
+			</hgroup>
+			<p>{{ data.about.introduction }}</p>
+		</section>
+		<a href="{% url 'blog_index' %}" style="display:block;background:rgb(227, 96, 9);width:20%;text-align:center;color:white;margin-top:5%;text-decoration:none;border-radius:10px;">>进入我的博客<</a>
+		<!-- Social Icons -->
+		<ul class="social cover">
+			<li><a class="facebook" title="Facebook" href="#"></a></li>
+			<li><a class="twitter" title="Twitter" href="#"></a></li>
+			<li><a class="cs" title="CS" href="#"></a></li>
+			<li><a class="tumblr" title="Tumblr" href="#"></a></li>
+			<li><a class="google" title="Google" href="#"></a></li>
+			<li><a class="linkedin" title="Linkedin" href="#"></a></li>
+			<li><a class="rss" title="RSS" href="#"></a></li>
+		</ul>
+	</section>
+
+	<!--*** Resume ***-->
+	<section class="resume_container cover step" id="resume" data-x="1000" data-y="-500" data-z="-1500" data-rotate="10" >
+		<h1 class="cover"><span class="h1-text fg-bgc">Resume</span><span class="h1-corner fg-bdc"></span></h1>
+		<!-- EXPERIENCE section -->
+		<section class="edu left">
+			<h2>工作经历</h2>
+			<ul class="edu-list">
+				{% for item in data.jobResume %}
+				<li>
+					<h3>{{ item.title }}</h3>
+					<p>{{ item.introduction }}</p>
+					<span>{{ item.start_time }} - {{ item.end_time }}</span>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+
+		<!-- EDUCATION section -->
+		<section class="job">
+			<h2>教育经历</h2>
+			<ul class="exp-list">
+				{% for item in data.eduResume %}
+				<li>
+					<h3>{{ item.title }}</h3>
+					<p>{{ item.introduction }}</p>
+					<span>{{ item.start_time }} - {{ item.end_time }}</span>
+				</li>
+				{% endfor %}
+			</ul>
+		</section>
+		<!-- SKILLS section -->
+		<section class="skills">
+			<div class="graph-skill">
+				<!-- Choose a number between 0 to 100 for your skills -->
+				<ul>
+					{% for item in data.stackInfo %}
+					<li class="fig{{ item.id }}"><span class="bar-title">{{item.rate}}</span></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="graph-title">
+				<ul>
+					{% for item in data.stackInfo %}
+					<li><span class="graph-lable fig{{ item.id }}"></span>{{item.name}}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</section>
+	</section>
+
+	<!--*** Portfolio 1/2 ***-->
+	<section class="portfolio_container portfolio1 cover step" id="portfolio" data-x="-300" data-y="-1200" data-z="-3000">
+		<h1 class="cover"><span class="h1-text fg-bgc">Recent Articles</span><span class="h1-corner fg-bdc"></span></h1>
+		<ul class="feature-list">
+			<li style="margin-bottom:3%">
+				还没有想好这个页面怎么写
+			</li>
+		</ul>
+	</section>
+
+
+	<!--*** Contact ***-->
+	<section class="contact_container cover step" id="contact" data-x="-1600" data-y="-600" data-z="-4700" data-rotate-z="10" data-rotate-y="180">
+		<h1 class="cover"><span class="h1-text fg-bgc">Contact Me</span><span class="h1-corner fg-bdc"></span></h1>
+
+		<!-- GOOGLE MAP -->
+		<div class="map left">
+
+		</div>
+
+		<!-- CONTACT FORM -->
+		<div class="form">
+			<form action="sendmail.php" class="right" id="contact-form" method="post" target='ifrm'>
+				<input id="name" placeholder="Name" type="text" name="name" title="Your Name" />
+				<input id="mail" placeholder="E-mail" type="text" name="mail" title="Your E-mail Address" />
+				<textarea id="msg" placeholder="Your Message" name="msg" cols="40" rows="10" title="The Text Sent to Me"></textarea>
+				<input type="submit" value="尚未启用" name="submit" class="fg-bgc" /><span class="corner submit fg-bdc"></span>
+			</form>
+
+			<!-- CONTACT INFO -->
+			<div class="contact-info right">
+				<p id="e-mail"><a href="mailto:{{ data.about.email }}">{{ data.about.email }}</a></p>
+				<p id="phone">{{ data.about.mobile }}</p>
+				<p id="website"><a href="mailto:{{ data.about.website }}">{{ data.about.website }}</a></p>
+				<p><a target="_blank" href="http://beian.miit.gov.cn/">晋ICP备20005099号-3</a></p>
+			</div>
+		</div>
+	</section>
+
+	<!--*** Features ***-->
+
+	<!-- If you want to have a overview you can simplay remove the comment -->
+	<!-- <section id="overview" class="step" data-x="0" data-y="-600" data-rotate-x="10" data-z="1000"></section> -->
+</div>
+</body>
+<script type="text/javascript" src={% static 'js/jquery.min.js' %}></script>
+<script type="text/javascript" src={% static 'js/impress.js' %}></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.3/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src={% static 'js/script.js' %}></script>
+</html>

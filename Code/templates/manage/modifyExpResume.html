@@ -1,0 +1,88 @@
+{% extends 'manage/base_single.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'plugins/datepicker/datepicker3.css' %}">
+<link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+<section class="col-lg-8 connectedSortable">
+    <form role="form" action="{% url 'modifyExpResume' %}" method="post" class="layui-form">
+        <div class="box-body">
+            <input name="id" value="{{ data.id }}" style="display:none">
+            <div class="form-group">
+                <label for="title">经历名称</label>
+                <input class="form-control" id="title" name="title" placeholder="经历名称" value="{{ data.title }}">
+            </div>
+            <div class="form-group">
+                <label>简介</label>
+                <textarea class="form-control" id="introduction" name="introduction" placeholder="简介"  style="height: 200px;">{{ data.introduction }}</textarea>
+
+            </div>
+            <div class="form-group">
+                <label>开始时间</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="start_time" id="start_time" value="{{ data.start_time | date:'Y-m-d' }}">
+                </div>
+                <!-- /.input group -->
+            </div>
+            <div class="form-group">
+                <label>结束时间</label>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="end_time" id="end_time" value="{{ data.end_time | date:'Y-m-d' }}">
+                </div>
+                <!-- /.input group -->
+            </div>
+
+            <div class="form-group">
+                {% if data.is_now %}
+                <input class="form-control" type="checkbox" name="is_now" title="是否至今" value=true checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="is_now" title="是否至今" value=true>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label>经历类型</label>
+                <select class="form-control select2" style="width: 40%;" name="type">
+                    {% if data.type == 'job' %}
+                    <option value="job" selected>工作经历</option>
+                    <option value="edu">教育经历</option>
+                    {% else %}
+                    <option value="job">工作经历</option>
+                    <option value="edu"selected>教育经历</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                {% if data.is_using %}
+                <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary" id="submit">提交</button>
+        </div>
+    </form>
+</section>
+<script src="{% static 'plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="{% static 'plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+$('#start_time').datepicker({
+    autoclose: true
+});
+$('#end_time').datepicker({
+    autoclose: true
+});
+</script>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% block hedaer %}
+<li class="active"><a href="{% url 'blog_index' %}">home</a></li>
+<li ><a href="{% url 'aboutMe' %}">about me</a></li>
+<li><a href="{% url 'timeline' %}">timeline</a></li>
+<li><a href="{% url 'category' %}">articles</a></li>
+<li><a href="{% url 'blogContactMe' %}">contact me</a></li>
+{% endblock %}
+{% block pageName %}
+{% endblock %}
+{% block slider %}
+<div class="color">
+    <span></span>
+</div>
+<div class="wrap">
+    <div class="fluid_container">
+        <div class="camera_wrap camera_magenta_skin" id="camera_wrap_2">
+            {% for item in slider %}
+            <div data-thumb="" data-src="../../resources/{{ item.coverImage }}" data-time="2000">
+                <div class="camera_caption fadeFromBottom">
+                    <a href="{% url 'article' item.id %}" style="color: white;text-decoration: underline"><h2>{{ item.title }}</h2></a>
+                    <p>{{ item.introduction }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block right %}
+{% endblock %}

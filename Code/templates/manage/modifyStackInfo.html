@@ -1,0 +1,42 @@
+{% extends 'manage/base_single.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'plugins/datepicker/datepicker3.css' %}">
+<link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+<section class="col-lg-8 connectedSortable">
+    <form role="form" action="{% url 'modifyStackInfo' %}" method="post" class="layui-form">
+        <div class="box-body">
+            <input name="id" value="{{ data.id }}" style="display:none">
+            <div class="form-group">
+                <label for="name">技术名称</label>
+                <input class="form-control" id="name" name="name" placeholder="技术名称" value="{{ data.name }}">
+            </div>
+            <div class="form-group">
+                <label for="rate">能力值（%）</label>
+                <input  class="form-control" id="rate" name="rate" placeholder="能力值" value="{{ data.rate }}">
+            </div>
+            <div class="form-group">
+                {% if data.is_using %}
+                <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary" id="submit">提交</button>
+        </div>
+    </form>
+</section>
+<script src="{% static 'plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="{% static 'plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+$('#datepicker').datepicker({
+    autoclose: true
+});
+</script>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'blog/base.html' %}
+{% block hedaer %}
+<li><a href="{% url 'blog_index' %}">home</a></li>
+<li  class="active"><a href="{% url 'aboutMe' %}">about me</a></li>
+<li><a href="{% url 'timeline' %}">timeline</a></li>
+<li><a href="{% url 'category' %}">articles</a></li>
+<li><a href="{% url 'blogContactMe' %}">contact me</a></li>
+{% endblock %}
+{% block slider %}
+<div class="top-heading">
+    <!--start-wrap-->
+    <div class="wrap">
+        <h1>about me</h1>
+    </div>
+    <!--end wrap-->
+</div>
+<div class="wrap">
+    <div class="content">
+        <!--about-grids-->
+        <div class="main-grid">
+            <!--grid-left-->
+            <div class="grid-left">
+                <div class="markdown">
+                    {{ data.content | safe }}
+                </div>
+<!--                <iframe id="mainFrame" src="{% url 'getAboutMe' %}" style="width:100%;height:100%"></iframe>-->
+            </div>
+            <!--end grid-left-->
+            <!--grid-right-->
+            <div class="grid-right">
+                <div class="side-bar">
+                    <div class="grid-right-headings">
+                        <h2><a href="#">about me</a></h2>
+                        <h6> </h6>
+                        <div class="clear"> </div>
+                    </div>
+                    <p style="padding:0px;">
+                        {{ intro }}
+                    </p>
+                    <div class="grid-right-headings">
+                        <h2><a href="#">RECENT ARTICLES</a></h2>
+                        <h6> </h6>
+                        <div class="clear"> </div>
+                    </div>
+                    <div class="seach-links">
+                        {% for item in data.recent %}
+                        <p><a href="{% url 'article' item.id %}">{{ item.title }}<font style="float:right">{{ item.update_time | date:'Y-m-d' }}</font></a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!--end grid-right-->
+            <div class="clear"> </div>
+        </div>
+        <!--end about-grids-->
+    </div>
+</div>
+{% endblock %}
+{% block recent %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% block hedaer %}
+<li><a href="{% url 'blog_index' %}">home</a></li>
+<li ><a href="{% url 'aboutMe' %}">about me</a></li>
+<li><a href="{% url 'timeline' %}">timeline</a></li>
+<li class="active"><a href="{% url 'category' %}">articles</a></li>
+<li><a href="{% url 'blogContactMe' %}">contact me</a></li>
+{% endblock %}
+{% block slider %}
+<div class="top-heading">
+    <!--start-wrap-->
+    <div class="wrap">
+        <h1>article</h1>
+    </div>
+    <!--end wrap-->
+</div>
+
+<div class="wrap">
+    <div class="portofolio-item">
+        <h1>{{ data.title }}</h1>
+        <div class="banner">
+            <img src="../../resources/{{ data.coverImage }}" alt="" />
+        </div>
+        <div class="markdown">
+            {{ data.content | safe }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block recent %}
+{% endblock %}

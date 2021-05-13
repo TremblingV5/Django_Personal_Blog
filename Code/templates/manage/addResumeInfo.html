@@ -1,0 +1,77 @@
+{% extends 'manage/base_single.html' %}
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'plugins/datepicker/datepicker3.css' %}">
+<link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+<section class="col-lg-8 connectedSortable">
+    <form role="form" action="{% url 'addResumeInfo' %}" method="post" class="layui-form"  enctype="multipart/form-data">
+        <div class="box-body">
+            <input name="id" value="{{ data.id }}" style="display:none">
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input class="form-control" id="name" name="name" placeholder="姓名" value="{{ data.name }}">
+            </div>
+            <div class="form-group">
+                <label for="title">意向职位</label>
+                <input  class="form-control" id="title" name="title" placeholder="意向职位" value="{{ data.title }}">
+            </div>
+            <div class="form-group">
+                <label for="introduction">个人介绍</label>
+                <textarea class="form-control" id="introduction" name="introduction" value="{{ data.introduction }}" placeholder="个人介绍" style="height: 200px;">{{ data.introduction }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>出生日期</label>
+
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" name="birthday" id="datepicker" value="{{ data.birthday | date:'Y-m-d' }}">
+                </div>
+                <!-- /.input group -->
+            </div>
+            <div class="form-group">
+                <label for="mobile">手机号码</label>
+                <input class="form-control" id="mobile" name="mobile" placeholder="请输入电话" value="{{ data.mobile }}">
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="请输入邮箱" value="{{ data.email }}">
+            </div>
+            <div class="form-group">
+                <label for="website">网站</label>
+                <input class="form-control" id="website" name="website" placeholder="网站" value="{{ data.website }}">
+            </div>
+            <div class="form-group">
+                <label for="address">地址</label>
+                <input class="form-control" id="address" name="address" placeholder="地址" value="{{ data.address }}">
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label>个人照片</label>-->
+<!--                <input class="form-control", id="personalImage" name="personalImage" type="file" value="" >-->
+<!--            </div>-->
+            <div class="form-group">
+                {% if data.is_using %}
+                <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true checked>
+                {% else %}
+                <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary" id="submit">提交</button>
+        </div>
+    </form>
+</section>
+<script src="{% static 'plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="{% static 'plugins/datepicker/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+$('#datepicker').datepicker({
+    autoclose: true
+});
+</script>
+{% endblock content %}

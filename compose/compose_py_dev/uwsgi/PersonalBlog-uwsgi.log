@@ -1,0 +1,13 @@
+*** Starting uWSGI 2.0.19.1 (64bit) on [Tue May 11 16:24:33 2021] ***
+compiled with version: 8.3.0 on 11 May 2021 16:21:29
+os: Linux-5.10.25-linuxkit #1 SMP Tue Mar 23 09:27:39 UTC 2021
+nodename: 716adb0c50ec
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 2
+current working directory: /var/www/html/Code
+writing pidfile to /tmp/PersonalBlog-master.pid
+detected binary path: /usr/local/bin/uwsgi
+chdir() to /var/www/html/PersonalBlog
+chdir(): No such file or directory [core/uwsgi.c line 2625]

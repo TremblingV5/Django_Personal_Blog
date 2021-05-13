@@ -1,0 +1,120 @@
+{% extends 'blog/base.html' %}
+{% block hedaer %}
+<li><a href="{% url 'blog_index' %}">home</a></li>
+<li ><a href="{% url 'aboutMe' %}">about me</a></li>
+<li class="active"><a href="{% url 'timeline' %}">timeline</a></li>
+<li><a href="{% url 'category' %}">articles</a></li>
+<li><a href="{% url 'blogContactMe' %}">contact me</a></li>
+{% endblock %}
+{% block slider %}
+<div class="top-heading">
+    <!--start-wrap-->
+    <div class="wrap">
+        <h1>timeline</h1>
+    </div>
+    <!--end wrap-->
+</div>
+
+<div class="blog-content">
+    <div class="wrap">
+        <!--blog-grid-->
+        <div class="blog-grids">
+            <!-- blog-left-->
+            <div class="blog-left">
+                <div  id="content">
+                    <!-- start slider -->
+                    <h6></h6>
+                    {% for item in data.data %}
+                    <div class="jesus">
+                        <img src="../../resources/{{ item.coverImage }}" alt= "{{ item.title }}" style="width:100%"/>
+                        <div class="sinfo">
+                            <div class="sinfo-left">
+                                <h3>date</h3>
+                                <span>{{ item.create_time | date:'Y-m-d' }}</span>
+                            </div>
+                            <div class="sinfo-right">
+                                <h4><a href="{% url 'article' item.id %}">{{ item.title }}</a></h4>
+                                <p>{{ item.introduction }}</p>
+                            </div>
+                            <div class="clear"> </div>
+                        </div>
+                    </div>
+                    <h6 style="width:100%"></h6>
+                    {% endfor %}
+                </div>
+                <div class="page-numbers">
+                    <ul style="width:100%;">
+                        <li id="load" class="active" style="width:90%;margin:0px;padding:0px;"><a>加载更多</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--end blog-left-->
+            <!--blog-right-->
+            <div class="blog-right">
+                <div class="side-bar">
+                    <div class="grid-right-headings">
+                        <h2><a href="#">about me</a></h2>
+                        <h6> </h6>
+                        <div class="clear"> </div>
+                    </div>
+                    <p style="padding:0px;">
+                        {{ intro }}
+                    </p>
+                    <div class="grid-right-headings">
+                        <h2><a href="#">RECENT ARTICLES</a></h2>
+                        <h6> </h6>
+                        <div class="clear"> </div>
+                    </div>
+                    <div class="seach-links">
+                        {% for item in data.recent %}
+                        <p><a href="{% url 'article' item.id %}">{{ item.title }}<font style="float:right">{{ item.update_time | date:'Y-m-d' }}</font></a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="clear"> </div>
+        </div>
+
+        <!--end blog-right-->
+    </div>
+    <!--end  blog-grids-->
+</div>
+<script>
+    var page = 1;
+    $('#load').click(function (){
+        page += 1;
+        $.ajax({
+            url: "{% url 'timeline' %}",
+            data: {
+                'type': 'json',
+                'p': page
+            },
+            method: "get",
+            success:function(result){
+                console.log(result['data']['data'][0]);
+                for (var i = 0; i < result['data']['data'].length; i ++){
+                    var newElements = "<div class='jesus'><img src='../../resources"
+                            + result['data']['data'][i]['coverImage']
+                            +  "' alt= '"
+                            + result['data']['data'][i]['title']
+                            + "' style='width:100%'/><div class='sinfo'><div class='sinfo-left'><h3>date</h3><span>"
+                            + result['data']['data'][i]['create_time_formatted']
+                            + "</span></div><div class='sinfo-right'><h4><a href='/blog/article/"
+                            + result['data']['data'][i]['id']
+                            + "'>"
+                            + result['data']['data'][i]['title']
+                            + "</a></h4><p>"
+                            + result['data']['data'][i]['introduction']
+                            + "</p></div><div class='clear'> </div></div></div><h6 style='width:100%'></h6>"
+                    $('#content').append(newElements);
+                }
+            },
+            error: function (){
+                $('#load').html('<a>已经到底啦</a>');
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% block recent %}
+{% endblock %}
