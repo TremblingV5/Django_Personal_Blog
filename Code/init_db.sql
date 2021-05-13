@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 13/05/2021 23:26:40
+ Date: 13/05/2021 23:30:09
 */
 
 SET NAMES utf8mb4;
@@ -228,6 +228,11 @@ CREATE TABLE `blog_aboutme`  (
   `update_time` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of blog_aboutme
+-- ----------------------------
+INSERT INTO `blog_aboutme` VALUES (1, 'Test', 1, 0, '2021-05-13 23:29:41.000000', '2021-05-13 23:29:45.000000');
 
 -- ----------------------------
 -- Table structure for blog_carousel
