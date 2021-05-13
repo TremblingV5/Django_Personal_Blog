@@ -31,9 +31,14 @@
 ### 运行
 
 1. 安装Docker
+    
     > https://www.baidu.com/s?wd=docker
+    
 2. Docker Compose
     ```shell script
     docker-compose -f docker-compose_py_dev.yml up --build -d
     ```
-3. 运行完毕后打开浏览器，访问127.0.0.1即可访问
+    
+3. 运行完毕后，执行数据库文件```./Code/init_db.sql```添加初始化信息
+
+4. 访问127.0.0.1
