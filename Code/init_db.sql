@@ -501,7 +501,6 @@ CREATE TABLE `resume_projects`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
-
 -- ----------------------------
 -- Table structure for resume_resume
 -- ----------------------------
