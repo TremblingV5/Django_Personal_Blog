@@ -162,7 +162,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    # os.path.join(BASE_DIR, '/static/'),
+    # FIXME:
+    # 此行代码原为：
+    # os.path.join(BASE_DIR, '/static/')
+    # 之前运行时并无报错，2021.5.22运行时发现找不到static文件，可能是之前运行时没有强制刷新浏览器的原因导致没有暴露问题
+    # TODO: 用于Docker部署的代码并未修改，2021.5.22使用docker-compose部署测试时，安装python库时网络较差，后续需要再进行测试
+    # 另：
+    # os.path.join(BASE_DIR, 'static') 的结果为 D:/{{ BASE_DIR }}/static
+    # os.path.join(BASE_DIR, '/static') 的结果为 D:/static
+    os.path.join(BASE_DIR, 'static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
