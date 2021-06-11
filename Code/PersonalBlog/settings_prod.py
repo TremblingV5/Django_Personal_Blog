@@ -17,6 +17,11 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
+with open(os.path.join(BASE_DIR, ".env"), "r") as f:
+    info = {
+        l.split("=")[0]: l.split("=")[1] for l in f.read().split("\n")
+    }
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -24,7 +29,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'in@9_=y-rl3bqcy&$#c#n28!62eir8_gj%6w0f4s7vzyrqb6r+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'demo.local',
@@ -115,9 +120,9 @@ CACHES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'personal_blog',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': info['MYSQL_DATABASE'],
+        'USER': info['MYSQL_USER'],
+        'PASSWORD': info['MYSQL_PASSWORD'],
         'HOST': 'db',
         'PORT': '3306'
     }
