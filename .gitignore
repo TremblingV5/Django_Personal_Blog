@@ -2,3 +2,5 @@
 /Code/.idea
 /Code/resources
 __pycache__
+/cert.pem
+/cert.key
