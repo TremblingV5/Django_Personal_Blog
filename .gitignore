@@ -2,5 +2,5 @@
 /Code/.idea
 /Code/resources
 __pycache__
-/cert.pem
-/cert.key
+compose/compose_py_prod/nginx/ssl/cert.key
+compose/compose_py_prod/nginx/ssl/cert.pem
