@@ -11,8 +11,8 @@
 
 	<link rel="stylesheet" type="text/css" href="{%static 'css/fonts_ubuntu_300_700.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
-	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.3/example1/colorbox.css" />
-	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+	<link rel="stylesheet" type="text/css" href="{%static 'css/colorbox.css' %}" />
+	<script type="text/javascript" src="{%static 'js/html5shiv.js' %}"></script>
 	<!--    <link rel="apple-touch-icon" href="apple-touch-icon.png" />-->
 	<!--    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />-->
 </head>
@@ -62,8 +62,8 @@
 	<section class="profile_container cover step" id="profile" data-x="0" data-y="0">
 		<h1 class="cover"><span class="h1-text fg-bgc">About Me</span><span class="h1-corner fg-bdc"></span></h1>
 		<figure class="me left">
-			<div id="myqr">Scan My QR Code</div>
-			<div id="myimg"></div>
+			<div id="myqr" style="background-image: url('{{ data.about.personalQRCode }}');">Scan My QR Code</div>
+			<div id="myimg" style="background-image: url('{{ data.about.personalImage }}');"></div>
 		</figure>
 		<section class="personal-info right">
 			<!-- Personal info section -->
@@ -217,6 +217,6 @@
 </body>
 <script type="text/javascript" src={% static 'js/jquery.min.js' %}></script>
 <script type="text/javascript" src={% static 'js/impress.js' %}></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.4.3/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.colorbox-min.js' %}"></script>
 <script type="text/javascript" src={% static 'js/script.js' %}></script>
 </html>

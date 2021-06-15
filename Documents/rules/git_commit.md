@@ -12,12 +12,19 @@
     > Use types like as follows
     >
     > FEATURE: Add a new feature
+    >
     > FIXED: Fix a bug
+    >
     > DOCS: Add some documents
+    >
     > STYLE: Modify code style
+    >
     > REFACTOR: Refactor code
+    >
     > TEST: Code for test or unittest
+    >
     > CHORE: Build or Tools
+    >
     > MISC: Not categorized as above
 
 2. ISSUE_ID

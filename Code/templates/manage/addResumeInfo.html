@@ -47,10 +47,14 @@
                 <label for="address">地址</label>
                 <input class="form-control" id="address" name="address" placeholder="地址" value="{{ data.address }}">
             </div>
-<!--            <div class="form-group">-->
-<!--                <label>个人照片</label>-->
-<!--                <input class="form-control", id="personalImage" name="personalImage" type="file" value="" >-->
-<!--            </div>-->
+            <div class="form-group">
+                <label>个人照片</label>
+                <input class="form-control", id="personalImage" name="personalImage" type="file" value="" >
+            </div>
+            <div class="form-group">
+                <label>二维码</label>
+                <input class="form-control", id="personalQRCode" name="personalQRCode" type="file" value="" >
+            </div>
             <div class="form-group">
                 {% if data.is_using %}
                 <input class="form-control" type="checkbox" name="is_using" title="是否展示" value=true checked>

@@ -7,14 +7,17 @@ from apps.manager.models import AdminUser
 from utils.hasher import get_md5
 import time
 import datetime
+from django.conf import settings
 
 class LoginApi(APIView):
     def get(self, requests):
         code = 200
         message = "Success"
-        data = {}
+        data = {
+            "config": settings.SITE_CONFIG
+        }
 
-        return HttpResponse(loader.get_template("manage/login.html").render({}))
+        return HttpResponse(loader.get_template("manage/login.html").render(data))
 
 
     def post(self, requests):

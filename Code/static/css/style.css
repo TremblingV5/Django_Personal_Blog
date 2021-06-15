@@ -801,7 +801,7 @@
     background-repeat: no-repeat;
   }
   section.profile_container figure.me #myimg {
-    background-image: url("images/me.jpg");
+    /* background-image: url("images/me.jpg"); */
   }
   section.profile_container figure.me #myqr {
     -webkit-transform: rotatey(-180deg);
