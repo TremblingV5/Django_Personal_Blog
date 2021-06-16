@@ -1,5 +1,3 @@
-resources="/var/www/html/Code/resources"
-
-if [ ! -d "$resources" ]; then
-  mkdir $resources
+if [ ! -d "/var/www/html/Code/resources" ];then
+  mkdir /var/www/html/Code/resources
 fi
