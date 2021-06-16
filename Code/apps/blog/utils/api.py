@@ -1,6 +1,6 @@
 from utils.api import AbstractApiView
 from django.http import HttpResponse, JsonResponse
-from PersonalBlog.settings import SITE_CONFIG
+from django.conf import settings
 from django.forms.models import model_to_dict
 
 from apps.resume.models import BasicInfo
@@ -26,7 +26,7 @@ class BlogAbstractApiView(AbstractApiView):
                     "code": result["code"],
                     "message": result["message"],
                     "data": result["data"],
-                    "config": SITE_CONFIG
+                    "config": settings.SITE_CONFIG
                 }, requests)
             )
 
@@ -61,6 +61,7 @@ class BlogAbstractApiView(AbstractApiView):
             self_introduction = exists[0].introduction
         except:
             self_introduction = []
+            basic = BasicInfo()
 
         try:
             exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
@@ -90,7 +91,7 @@ class BlogAbstractApiView(AbstractApiView):
                         "email": basic.email,
                         "website": basic.website
                     },
-                    "config": SITE_CONFIG
+                    "config": settings.SITE_CONFIG
                 }, requests)
             )
 

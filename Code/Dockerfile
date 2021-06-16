@@ -22,6 +22,7 @@ WORKDIR $APP_HOME
 
 # 将当前目录加入到工作目录中（. 表示当前目录）
 ADD . $APP_HOME
+RUN /bin/bash ./create_resources_path.sh
 RUN chmod -R 777 /var/www/html/Code/resources
 
 # 更新pip版本
