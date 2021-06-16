@@ -47,17 +47,19 @@
 
 4. 访问127.0.0.1
 
-### 生产环境
+### 生产环境的部署
 
-1. 安装Docker（略）
+1. 安装Docker及docker-compose（略）
 
 2. 更改```./Code/.env```中数据库密码
 
-3. 将ssl证书复制到```./compose/compose_py_prod/nginx/ssl```目录下，分别命名为```cert.pem```和```cert.key```
+3. 更改```./compose/compose_py_prod/redis/redis.conf```和```./Code/.redis```中redis的密码
 
-4. 修改```./Code/PersonalBlog/settings_prod.py```中的```ALLOWED_HOSTS```，添加域名或ip以便正常访问
+4. 将ssl证书复制到```./compose/compose_py_prod/nginx/ssl```目录下，分别命名为```cert.pem```和```cert.key```
 
-5. Docker compose（略）
+5. 修改```./Code/PersonalBlog/settings_prod.py```中的```ALLOWED_HOSTS```，添加域名或ip以便正常访问
+
+6. Docker compose（略）
 
 ### 如何Debug
 

@@ -76,7 +76,12 @@ function login(){
         method: "post",
         success:function(result){
             if (result['code'] == 200){
-                window.location.href =  "http://" + window.location.host + "{% url 'workbench' %}";
+                var ishttps = 'https:' == document.location.protocol ? true: false;
+                if (ishttps){
+                    window.location.href =  "https://" + window.location.host + "{% url 'workbench' %}";
+                } else {
+                    window.location.href =  "http://" + window.location.host + "{% url 'workbench' %}";
+                }
             }
         }
     });

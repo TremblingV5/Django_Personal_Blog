@@ -25,21 +25,24 @@ class LoginApi(APIView):
         message = "Success"
         data = {}
 
-        item = AdminUser.objects.filter(username=requests.POST.get('username'))
-        if len(item) > 0:
-            password = item[0].password
-            if password == requests.POST.get('password'):
-                code = 200
-            else:
-                code = 500
-
         response = JsonResponse({
             "code": code
         })
 
-        new_token = get_md5(str(time.time()))
-        response.set_cookie("token", new_token, expires=datetime.datetime.now() + datetime.timedelta(hours=2))
-        caches['tokenPool'].set(new_token, True, 2 * 60 * 60)
+        item = AdminUser.objects.filter(username=requests.POST.get('username'))
+        if len(item) > 0:
+            password = item[0].password
+            if password == requests.POST.get('password'):
+                response = JsonResponse({
+                    "code": 200
+                })
+                new_token = get_md5(str(time.time()))
+                response.set_cookie("token", new_token, expires=datetime.datetime.now() + datetime.timedelta(hours=2))
+                caches['tokenPool'].set(new_token, True, 2 * 60 * 60)
+            else:
+                response = JsonResponse({
+                    "code": 500
+                })
 
         return response
 

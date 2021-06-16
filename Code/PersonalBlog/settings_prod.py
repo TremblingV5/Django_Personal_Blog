@@ -17,10 +17,15 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
-with open(os.path.join(BASE_DIR, ".env"), "r") as f:
-    info = {
-        l.split("=")[0]: l.split("=")[1] for l in f.read().split("\n")
-    }
+def readConf(path, tag):
+    with open(path, "r") as f:
+        return {
+            l.split(tag)[0]: l.split(tag)[1] for l in f.read().split("\n")
+        }
+
+
+info = readConf(os.path.join(BASE_DIR, ".env"), "=")
+redis = readConf(os.path.join(BASE_DIR, ".redis"), "=")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -99,14 +104,14 @@ WSGI_APPLICATION = 'PersonalBlog.wsgi.application'
 CACHES = {
     'default': {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/0",
+        "LOCATION": "redis://:%s@redis:6379/0" % redis['PWD'],
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     "tokenPool": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/1",
+        "LOCATION": "redis://:%s@redis:6379/1" % redis['PWD'],
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
