@@ -45,8 +45,7 @@ class BasicInfoAPI(AbstractApiView):
             ]
             for i in range(len(stackInfo)):
                 stackInfo[i]['background'] = backgroundList[i]
-            print(stackInfo)
-        except Exception as e:
+        except:
             stackInfo = {}
 
         return {
