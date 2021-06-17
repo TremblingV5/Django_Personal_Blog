@@ -40,7 +40,13 @@ class BasicInfoAPI(AbstractApiView):
                 queryset = queryset[:7]
             result = CapabilityStackSerializer(queryset, many=True)
             stackInfo = result.data
-        except:
+            backgroundList = [
+                "#D37091", "#B16DB2", "#6D75C8", "#007BC8", "#007BAA", "#007575", "#FF9778"
+            ]
+            for i in range(len(stackInfo)):
+                stackInfo[i]['background'] = backgroundList[i]
+            print(stackInfo)
+        except Exception as e:
             stackInfo = {}
 
         return {

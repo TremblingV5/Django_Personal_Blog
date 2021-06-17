@@ -156,14 +156,14 @@
 				<!-- Choose a number between 0 to 100 for your skills -->
 				<ul>
 					{% for item in data.stackInfo %}
-					<li class="fig{{ item.id }}"><span class="bar-title">{{item.rate}}</span></li>
+					<li class="fig{{ item.id }}" style="background-color:{{ item.background }}"><span class="bar-title">{{item.rate}}</span></li>
 					{% endfor %}
 				</ul>
 			</div>
 			<div class="graph-title">
 				<ul>
 					{% for item in data.stackInfo %}
-					<li><span class="graph-lable fig{{ item.id }}"></span>{{item.name}}</li>
+					<li><span class="graph-lable fig{{ item.id }}" style="background-color:{{ item.background }}"></span>{{item.name}}</li>
 					{% endfor %}
 				</ul>
 			</div>
