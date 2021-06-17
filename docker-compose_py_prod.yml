@@ -52,7 +52,6 @@ services:
             - ./compose/compose_py_prod/uwsgi:/tmp # 挂载uwsgi日志
         environment: 
             - Debug=False
-            # - DB_PWD=root
         networks:
             - nginx_network
             - db_network
@@ -75,7 +74,7 @@ services:
             - ./compose/compose_py_prod/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf # 挂载nginx配置文件
             - ./compose/compose_py_prod/nginx/ssl:/usr/share/nginx/ssl # 挂载ssl证书目录
             - ./compose/compose_py_prod/nginx/log:/var/log/nginx # 挂载日志
-            - static_vol:/usr/share/nginx/html/static # 挂载静态文件
+            - ./Code/static:/usr/share/nginx/html/static # 挂载静态文件
             - media_vol:/usr/share/nginx/html/resources # 挂载用户上传媒体文件
         networks:
             - nginx_network
