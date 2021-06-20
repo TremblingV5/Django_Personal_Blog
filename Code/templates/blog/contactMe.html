@@ -6,6 +6,9 @@
 <li><a href="{% url 'category' %}">articles</a></li>
 <li class="active"><a href="{% url 'blogContactMe' %}">contact me</a></li>
 {% endblock %}
+{% block title %}
+<title>{{ config.username }} > Contact Me</title>
+{% endblock %}
 {% block slider %}
 <div class="top-heading">
     <!--start-wrap-->
@@ -37,7 +40,7 @@
 
                             <div class="clear"></div>
                             <div>
-                                <span><textarea rows="2" cols="70" onfocus="if(this.value == 'Your Message') this.value='';" onblur="if(this.value == '') this.value='Your Message';">Your Message</textarea></span>
+                                <span><textarea rows="2" cols="70" onfocus="if(this.value == 'Your Message') this.value='';" onblur="if(this.value == '') this.value='此功能暂未启用，请直接给我发邮件哦~ 看到一定会回复';">此功能暂未启用，请直接给我发邮件哦~ 看到一定会回复</textarea></span>
                             </div>
                             <div>
                                 <span>

@@ -6,6 +6,9 @@
 <li class="active"><a href="{% url 'category' %}">articles</a></li>
 <li><a href="{% url 'blogContactMe' %}">contact me</a></li>
 {% endblock %}
+{% block title %}
+<title>Article > {{ data.title }}</title>
+{% endblock %}
 {% block slider %}
 <div class="top-heading">
     <!--start-wrap-->

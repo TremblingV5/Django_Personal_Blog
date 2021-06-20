@@ -2,11 +2,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home </title>
+	{% block title %}
+	<title>{{ config.username }} > Blog</title>
+	{% endblock %}
 	{% load static %}
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+	<style type="text/css">
+	#firetop {
+		width: 74px;
+		height: 125px;
+		background: url({% static 'images/rocket.png' %});
+ 	    background-size: cover;
+		cursor: pointer;
+		position: fixed;
+		bottom: 100%;
+		right: 10%;
+		transition: bottom 1s;
+		display: none;
+	}
+
+	#firetop:hover {
+		bottom: 100%;
+		right: 10%;
+	}
+
+	body {
+		width: 100%;
+	}
+
+	@keyframes move {
+		0% {
+
+		}
+		100% {
+
+		}
+	}
+    </style>
+	<link href="{% static 'css/fontOpenSans.css' %}" rel='stylesheet' type='text/css'/>
 	<link href="{% static 'blog/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
 	<link href="{% static 'test.css' %}"  rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src="{% static 'blog/js/jquery.js' %}"></script>
@@ -235,6 +269,51 @@
 		</div>
 	</div>
 </div>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+<div id="firetop"></div>
+<script>
+    (function () {
+        var firetop = document.getElementById('firetop');
+        //当有滚动时触发事件
+        window.onscroll = function () {
+            var num = window.scrollY;//获取滚动条的移动距离
+            var num1 = window.innerHeight;//屏幕可视区的高度
+            if (num > 200) {
+                firetop.style.display = 'block';//让回到顶部的小火箭出现
+                firetop.style.bottom = '0px';
+            } else if (num <= 0) {
+                firetop.style.bottom = num1 + 'px';//改变定位的位置
+            }
+        }
+        //点击事件
+        firetop.onclick = function () {
+            var scrolltop = window.scrollY;
+            var timer = setInterval(function () {//定时器启动
+                scrolltop -= 50;
+                if (scrolltop <= -window.innerHeight) {
+                    firetop.style.display = 'none'; //小火箭隐藏
+                    firetop.style.animation = '';   //清除动画
+                    firetop.style.bottom = 0 + 'px';    //还原小火箭位置
+                    clearInterval(timer);
+                }
+                window.scrollTo(0, scrolltop);//设置滚动条距离顶部的距离
+            }, 30);
+            this.style = 'animation:move 2s steps(4, end) infinite;'//给动画
+        }
+
+    })();
+</script>
 </body>
+<script>
+	document.addEventListener('visibilitychange', function () {
+		if (document.visibilityState == 'hidden') {
+			normal_title = document.title;
+			document.title = ' (｡・`ω´･) ' + normal_title;
+		} else {
+			document.title = '  (oﾟωﾟo) ' + normal_title;
+			setTimeout(function (){
+				document.title = normal_title;
+			}, 1000);
+		}
+	});
+</script>
 </html>

@@ -109,9 +109,9 @@ $(function () {
             <!--end-mfp -->
             <div class="container">
                 <ul id="filters" class="clearfix">
-                    <li><span class="filter active" data-filter="{{ data.cate }}">All</span></li>
+                    <li><span class="filter active" data-filter="{{ data.cate }}" style="height:18px;line-height:18px">All</span></li>
                     {% for item in data.category %}
-                    <li><span class="filter" data-filter="{{ item }}">{{ item }}</span></li>
+                    <li><span class="filter" data-filter="{{ item }}" style="height:18px;line-height:18px">{{ item }}</span></li>
                     {% endfor %}
                 </ul>
                 <div id="portfoliolist">
@@ -175,7 +175,7 @@ $(function () {
                 $("span.filter.active").click();
             },
             error: function (){
-                $('#load').html('<a>已经到底啦</a>');
+                $('#load').html('<a>已经到底啦,不信你再点一次</a>');
             }
         });
     });

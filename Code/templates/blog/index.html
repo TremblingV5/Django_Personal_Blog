@@ -6,6 +6,9 @@
 <li><a href="{% url 'category' %}">articles</a></li>
 <li><a href="{% url 'blogContactMe' %}">contact me</a></li>
 {% endblock %}
+{% block title %}
+<title>{{ config.username }} > Blog Home</title>
+{% endblock %}
 {% block pageName %}
 {% endblock %}
 {% block slider %}

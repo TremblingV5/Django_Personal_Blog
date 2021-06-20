@@ -29,7 +29,7 @@ class AboutMeApi(AbstractApiView):
             "message": message,
             "data": {
                 'content': content,
-                'recent': recent[:15]
+                'recent': recent[:10]
             },
             "template": loader.get_template("blog/aboutMe.html")
         }

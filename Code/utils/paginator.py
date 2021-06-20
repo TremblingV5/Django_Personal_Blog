@@ -38,10 +38,10 @@ class ManagePagePagination(PageNumberPagination):
 
 
 class ArticleCategoryPagePagination(PageNumberPagination):
-    page_size = 20
+    page_size = 12
     page_query_param = "p"
     page_size_query_param = "size"
-    max_page_size = 5
+    max_page_size = 12
 
     def paginate_queryset(self, queryset, request, view=None):
         """
