@@ -150,7 +150,9 @@
 		<!--end-logo-->
 		<!--start-menu-->
 		<div class="menu">
-			<a class="toggleMenu" href="#"><img src="images/nav.png" alt= " " /></a>
+			<a class="toggleMenu" href="#">
+				<img src="{% static 'images/nav.png' %}" alt= " " style="width:100%;height:100%"/>
+			</a>
 			<ul class="nav">
 				{% block hedaer %}
 				<li class="active"><a href="{% url 'blog_index' %}">home</a></li>
@@ -161,7 +163,7 @@
 				{% endblock %}
 				<div class="clear"> </div>
 			</ul>
-			<script type="text/javascript" src="js/responsive-nav.js"></script>
+			<script type="text/javascript" src="{% static 'js/responsive-nav.js' %}"></script>
 		</div>
 		<div class="clear"> </div>
 		<!--end-menu-->

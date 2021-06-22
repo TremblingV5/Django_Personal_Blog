@@ -4,6 +4,7 @@ from apps.articles.models import Articles
 from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
+from imagekit.models.fields.files import ProcessedImageFieldFile
 import markdown
 
 class AboutMeApi(AbstractApiView):
@@ -23,6 +24,11 @@ class AboutMeApi(AbstractApiView):
 
         exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
         recent = [model_to_dict(exists[i]) for i in range(len(exists))]
+
+        for item in recent:
+            for k in item:
+                if isinstance(item[k], ProcessedImageFieldFile):
+                    item[k] = item[k].name
 
         return {
             "code": code,

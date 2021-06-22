@@ -220,7 +220,7 @@ body {
 }
 
 .toggleMenu {
-	display: none;
+	/* display: none; */
 	background: #e8603c;
 	padding: 10px 10px 5px 10px;
 	border-radius: 2em;
