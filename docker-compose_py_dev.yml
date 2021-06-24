@@ -5,6 +5,7 @@ volumes: # 自定义数据卷
     redis_vol: #定义数据卷同步存放redis数据
     media_vol: #定义数据卷同步存放web项目用户上传到media文件夹的数据
     static_vol: #定义数据卷同步存放web项目static文件夹的数据
+    whoosh:
 
 networks: # 自定义网络(默认桥接), 不使用links通信
     nginx_network:
@@ -49,7 +50,8 @@ services:
             - ./Code:/var/www/html/Code # 挂载项目代码
             - static_vol:/var/www/html/Code/static # 以数据卷挂载容器内static文件
             - media_vol:/var/www/html/Code/resources # 以数据卷挂载容器内用户上传媒体文件
-            - ./compose/compose_py_dev/uwsgi:/tmp # 挂载uwsgi日志
+            - ./compose/compose_py_prod/uwsgi:/tmp # 挂载uwsgi日志
+            - whoosh:/var/www/html/Code/PersonalBlog/whoosh_index
         networks:
             - nginx_network
             - db_network
