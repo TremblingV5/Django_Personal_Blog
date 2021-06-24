@@ -13,7 +13,7 @@ done
 python manage_prod.py collectstatic --noinput&&
 python manage_prod.py makemigrations&&
 python manage_prod.py migrate&&
-uwsgi --ini /var/www/html/Code/uwsgi.ini&&
+/usr/local/bin/uwsgi --ini /var/www/html/Code/uwsgi.ini&&
 tail -f /dev/null
 
 exec "$@"
