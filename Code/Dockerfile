@@ -30,6 +30,7 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 
 # 安装项目依赖
 RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+COPY six.py /usr/local/lib/python3.6/site-packages/django/utils
 
 RUN sh -c '/bin/echo -e "y" | python manage.py rebuild_index'
 
