@@ -31,6 +31,8 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 # 安装项目依赖
 RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+RUN sh -c '/bin/echo -e "y" | python manage.py rebuild_index'
+
 # 移除\r in windows
 RUN sed -i 's/\r//' ./start.sh
 

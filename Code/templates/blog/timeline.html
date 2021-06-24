@@ -24,16 +24,27 @@
         <div class="blog-grids">
             <!-- blog-left-->
             <div class="blog-left">
+                <div class="contact-form">
+                    <form method="get" action="">
+                        <div>
+                            <input name="q" id="q" type="text" class="textbox right" placeholder="Search">
+                        </div>
+                        <div>
+                            <input type="submit" class="" value="搜索" style="margin-top:0;"/>
+                        </div>
+                    </form>
+                </div>
                 <div  id="content">
                     <!-- start slider -->
-                    <h6></h6>
+
+<!--                    <h6 style="display:block"></h6>-->
                     {% for item in data.data %}
                     <div class="jesus">
                         <img src="../../resources/{{ item.coverImage }}" alt= "{{ item.title }}" style="width:100%"/>
                         <div class="sinfo">
                             <div class="sinfo-left">
                                 <h3>date</h3>
-                                <span>{{ item.create_time | date:'Y-m-d' }}</span>
+                                <span>{{ item.create_time_formatted }}</span>
                             </div>
                             <div class="sinfo-right">
                                 <h4><a href="{% url 'article' item.id %}">{{ item.title }}</a></h4>
@@ -83,6 +94,18 @@
     <!--end  blog-grids-->
 </div>
 <script>
+    function getQueryVariable(variable) {
+           var query = window.location.search.substring(1);
+           var vars = decodeURIComponent(query.split("&"));
+           var pair = vars.split("=");
+           if(pair[0] == variable){
+                return pair[1];
+           }
+           return null;
+    }
+
+    $("#q").val(getQueryVariable("q"));
+
     var page = 1;
     $('#load').click(function (){
         page += 1;
@@ -90,7 +113,8 @@
             url: "{% url 'timeline' %}",
             data: {
                 'type': 'json',
-                'p': page
+                'p': page,
+                'q': getQueryVariable("q")
             },
             method: "get",
             success:function(result){
