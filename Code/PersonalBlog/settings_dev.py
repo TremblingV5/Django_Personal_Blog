@@ -59,6 +59,8 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES':
         ('rest_framework.renderers.JSONRenderer', ),
