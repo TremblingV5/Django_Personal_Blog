@@ -1,26 +1,21 @@
 from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
 from apps.articles.models import Articles
-from apps.articles.serializers.Articles import ArticlesSerializer
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 from utils.paginator import ManagePagePagination
 from haystack.views import SearchView
-
-import urllib
-
 from django.http import Http404
 from django.core.paginator import InvalidPage, Paginator
-
-import datetime
 import json
-import requests
+
 
 class TimelineApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
+    CODE = 200
+    TEMPLATE = "blog/timeline.html"
+
+    def get_solution(self, requests):
         paginator = ManagePagePagination()
         exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
         recent = [model_to_dict(exists[i]) for i in range(len(exists))][:15]
@@ -41,29 +36,10 @@ class TimelineApi(AbstractApiView):
                 data[i]['create_time_formatted'] = exists[i].create_time.strftime("%Y-%m-%d")
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 "data": data,
                 "recent": recent
-            },
-            "template": loader.get_template("blog/timeline.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-        paginator = ManagePagePagination()
-        exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
-        exists, num_pages = paginator.paginate_queryset(exists, requests, view=self)
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": model_to_dict(exists),
-            "template": loader.get_template("blog/aboutMe.html")
+            }
         }
 
 class Search(SearchView):

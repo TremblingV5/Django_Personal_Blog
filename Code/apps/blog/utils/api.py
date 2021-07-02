@@ -7,33 +7,10 @@ from apps.resume.models import BasicInfo
 from apps.articles.models import Articles
 from apps.articles.serializers.Articles import ArticlesSerializer
 
+
 class BlogAbstractApiView(AbstractApiView):
-    """
-    不要重写 post, get两个方法
-    """
-    def post(self, requests):
-        result = self.post_solution(requests)
-        type = requests.POST.get("type")
-        if type == "json":
-            return JsonResponse({
-                "code": result["code"],
-                "message": result["message"],
-                "data": result["data"]
-            })
-        else:
-            return HttpResponse(
-                result["template"].render({
-                    "code": result["code"],
-                    "message": result["message"],
-                    "data": result["data"],
-                    "config": settings.SITE_CONFIG
-                }, requests)
-            )
 
-    def get(self, requests):
-        result = self.get_solution(requests)
-        type = requests.GET.get("type")
-
+    def data_wrap(self, responseData):
         try:
             exists = Articles.objects.filter(is_deleted=False, in_turn=True).order_by("id")
             slider = [model_to_dict(exists[i]) for i in range(len(exists))]
@@ -69,31 +46,21 @@ class BlogAbstractApiView(AbstractApiView):
         except:
             recent_footer = []
 
-        if type == "json":
-            return JsonResponse({
-                "code": result["code"],
-                "message": result["message"],
-                "data": result["data"]
-            })
-        else:
-            return HttpResponse(
-                result["template"].render({
-                    "code": result["code"],
-                    "message": result["message"],
-                    "slider": slider,
-                    "recentA": recentArticles[0],
-                    "recentB": recentArticles[1],
-                    "data": result["data"],
-                    "intro": self_introduction,
-                    "recent_footer": recent_footer[:5],
-                    "basic": {
-                        "phone": basic.mobile,
-                        "email": basic.email,
-                        "website": basic.website
-                    },
-                    "config": settings.SITE_CONFIG
-                }, requests)
-            )
+        responseData.update({
+            "slider": slider,
+            "recentA": recentArticles[0],
+            "recentB": recentArticles[1],
+            "intro": self_introduction,
+            "recent_footer": recent_footer[:5],
+            "basic": {
+                "phone": basic.mobile,
+                "email": basic.email,
+                "website": basic.website
+            },
+            "config": settings.SITE_CONFIG
+        })
+
+        return responseData
 
     def put(self, requests):
         pass
@@ -102,12 +69,6 @@ class BlogAbstractApiView(AbstractApiView):
         pass
 
     def post_solution(self, requests):
-        """
-        :param requests:
-        :return:
-            一个字典对象，包含如下索引：code、message、data、http_code、templates
-            需要将http返回的报文的状态码设置为http_code
-        """
         pass
 
     def get_solution(self, requests):

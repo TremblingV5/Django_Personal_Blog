@@ -11,8 +11,6 @@ from django.conf import settings
 
 class LoginApi(APIView):
     def get(self, requests):
-        code = 200
-        message = "Success"
         data = {
             "config": settings.SITE_CONFIG
         }
@@ -22,8 +20,6 @@ class LoginApi(APIView):
 
     def post(self, requests):
         code = 500
-        message = "Success"
-        data = {}
 
         response = JsonResponse({
             "code": code

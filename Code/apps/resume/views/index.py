@@ -5,19 +5,24 @@ from apps.resume.serializers.BasicInfo import BasicInfoSerializer
 from apps.resume.serializers.Resume import ResumeSerializer
 from apps.resume.serializers.CapabilityStack import CapabilityStackSerializer
 
+from utils.modelsUtil.getter import getter
+
 class BasicInfoAPI(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
+
+    CODE = 200
+
+    def data_wrap(self, responseData):
         data = {}
+
+        g = getter("articles.models", "Articles")
+        print(g.module.objects.all())
 
         try:
             queryset = BasicInfo.objects.filter(is_using=1, is_deleted=False)
             result = BasicInfoSerializer(queryset, many=True)
             aboutMe = result.data[0]
         except:
-            code = 404
-            message = "Get personal information defeat"
+            self.CODE = 404
             aboutMe = {}
 
         try:
@@ -48,14 +53,11 @@ class BasicInfoAPI(AbstractApiView):
         except:
             stackInfo = {}
 
-        return {
-            "code": code,
-            "message": message,
-            "data": {
-                "about": aboutMe,
-                'eduResume': eduResume,
-                'jobResume': jobResume,
-                'stackInfo': stackInfo
-            },
-            "template": loader.get_template("resume/base.html")
+        responseData["data"] = {
+            "about": aboutMe,
+            'eduResume': eduResume,
+            'jobResume': jobResume,
+            'stackInfo': stackInfo
         }
+
+        return responseData

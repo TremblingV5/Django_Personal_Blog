@@ -1,35 +1,17 @@
 from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
+from apps.manager.utils.CommonApi import CommonApi
 from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 from apps.manager.models import ContactInfo
 from apps.manager.serializers.contactInfo import ContactInfoSerializer
 
-class ContactInfoApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
-        exists = ContactInfo.objects.filter(is_deleted=False)
+class ContactInfoApi(CommonApi):
 
-        return {
-            "code": code,
-            "message": message,
-            "data": [model_to_dict(exists[i]) for i in range(len(exists))],
-            "template": loader.get_template("manage/contactInfo.html")
-        }
+    TEMPLATE = "manage/contactInfo.html"
+    TARGET = ContactInfo
 
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": None
-        }
 
 class ModifyContactInfoApi(AbstractApiView):
     def get_solution(self, requests):

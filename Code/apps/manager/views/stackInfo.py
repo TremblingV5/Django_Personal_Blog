@@ -1,40 +1,24 @@
 from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
+from apps.manager.utils.CommonApi import CommonApi
 from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 from apps.resume.models import CapabilityStack
 from apps.resume.serializers.CapabilityStack import CapabilityStackSerializer
 
-class CapabilityStackApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
+class CapabilityStackApi(CommonApi):
 
-        exists = CapabilityStack.objects.filter(is_deleted=False)
+    CODE = 200
+    TEMPLATE = "manage/stackInfo.html"
+    TARGET = CapabilityStack
 
-        return {
-            "code": code,
-            "message": message,
-            "data": [model_to_dict(exists[i]) for i in range(len(exists))],
-            "template": loader.get_template("manage/stackInfo.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/modifyStackInfo.html")
-        }
 
 class ModifyCapabilityStackApi(AbstractApiView):
+
+    CODE = 200
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/modifyStackInfo.html"
         data = {}
 
         record_id = requests.GET.get('id')
@@ -45,15 +29,11 @@ class ModifyCapabilityStackApi(AbstractApiView):
                 data = exists[0]
 
         return {
-            "code": code,
-            "message": message,
-            "data": data,
-            "template": loader.get_template("manage/modifyStackInfo.html")
+            "data": data
         }
 
     def post_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/200.html"
 
         res = CapabilityStackSerializer(data=requests.data, many=False)
         if res.is_valid(raise_exception=True):
@@ -63,12 +43,7 @@ class ModifyCapabilityStackApi(AbstractApiView):
             else:
                 res.create(res.data)
 
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/200.html")
-        }
+        return
 
     def delete(self, requests):
         code = 0

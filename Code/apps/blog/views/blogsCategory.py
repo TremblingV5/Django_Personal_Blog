@@ -7,10 +7,11 @@ from django.template import loader
 from django.forms.models import model_to_dict
 
 class BlogCategoryApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
+    CODE = 200
+    TEMPLATE = "blog/blogCategory.html"
+
+    def get_solution(self, requests):
         paginator = ArticleCategoryPagePagination()
         exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
 
@@ -25,24 +26,9 @@ class BlogCategoryApi(AbstractApiView):
         data, num_pages = paginator.paginate_queryset(data, requests, view=self)
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 "data": data,
                 "category": cate,
                 'cate': " ".join(cate)
-            },
-            "template": loader.get_template("blog/blogCategory.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("blog/blogCategory.html")
+            }
         }

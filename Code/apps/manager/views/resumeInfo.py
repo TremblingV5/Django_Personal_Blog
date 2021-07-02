@@ -1,41 +1,23 @@
 from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
+from apps.manager.utils.CommonApi import CommonApi
 from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 from apps.resume.models import BasicInfo
 from apps.resume.serializers.BasicInfo import BasicInfoSerializer
 
-class ResumeInfoApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
+class ResumeInfoApi(CommonApi):
 
-        exists = BasicInfo.objects.filter(is_deleted=False)
-        print([model_to_dict(exists[i]) for i in range(len(exists))])
+    TEMPLATE = "manage/resumeInfo.html"
+    TARGET = BasicInfo
 
-        return {
-            "code": code,
-            "message": message,
-            "data": [model_to_dict(exists[i]) for i in range(len(exists))],
-            "template": loader.get_template("manage/resumeInfo.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/addResumeInfo.html")
-        }
 
 class AddResumeInfoApi(AbstractApiView):
+
+    CODE = 200
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/addResumeInfo.html"
         data = {}
 
         record_id = requests.GET.get('id')
@@ -46,15 +28,11 @@ class AddResumeInfoApi(AbstractApiView):
                 data = exists[0]
 
         return {
-            "code": code,
-            "message": message,
-            "data": data,
-            "template": loader.get_template("manage/addResumeInfo.html")
+            "data": data
         }
 
     def post_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/200.html"
 
         res = BasicInfoSerializer(data=requests.data, many=False)
         if res.is_valid(raise_exception=True):
@@ -64,12 +42,7 @@ class AddResumeInfoApi(AbstractApiView):
             else:
                 res.create(res.data)
 
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/200.html")
-        }
+        return
 
     def delete(self, requests):
         code = 0

@@ -1,26 +1,22 @@
 from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
+from utils.parser import parse_md
 from apps.blog.models import AboutMe
 from apps.articles.models import Articles
 from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 from imagekit.models.fields.files import ProcessedImageFieldFile
-import markdown
+
 
 class AboutMeApi(AbstractApiView):
+
+    CODE = 200
+    TEMPLATE = "blog/aboutMe.html"
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
         exists = AboutMe.objects.filter()
-        content = model_to_dict(exists[0])['content']
-
-        content = markdown.markdown(content.replace("\r\n",' \n'), extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            'markdown.extensions.toc',
-            'mdx_math',
-        ])
+        content = parse_md(model_to_dict(exists[0])['content'])
 
         exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
         recent = [model_to_dict(exists[i]) for i in range(len(exists))]
@@ -31,47 +27,24 @@ class AboutMeApi(AbstractApiView):
                     item[k] = item[k].name
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 'content': content,
                 'recent': recent[:10]
-            },
-            "template": loader.get_template("blog/aboutMe.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("blog/aboutMe.html")
+            }
         }
 
 class GetAboutMeApi(AbstractApiView):
+
+    CODE = 200
+    TEMPLATE = "blog/articlePage.html"
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
         exists = AboutMe.objects.filter()
-        content = model_to_dict(exists[0])['content']
-
-        content = markdown.markdown(content, extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            'markdown.extensions.toc',
-            'mdx-math'
-        ])
+        content = parse_md(model_to_dict(exists[0])['content'])
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 'content': content
-            },
-            "template": loader.get_template("blog/articlePage.html")
+            }
         }

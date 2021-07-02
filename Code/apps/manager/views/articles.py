@@ -9,9 +9,11 @@ from apps.articles.models import ArticleCategories
 from utils.paginator import ManagePagePagination
 
 class ArticlesApi(AbstractApiView):
+
+    CODE = 200
+    TEMPLATE = "manage/articles.html"
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
         paginator = ManagePagePagination()
         exists = Articles.objects.filter(is_deleted=False).order_by("-create_time")
@@ -21,29 +23,15 @@ class ArticlesApi(AbstractApiView):
         for i in range(len(exists)):
             data[i]['cate_id'] = exists[i].cate_id.name
         return {
-            "code": code,
-            "message": message,
-            "data": data,
-            "template": loader.get_template("manage/articles.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/modifyArticles.html")
+            "data": data
         }
 
 class ModifyArticlesApi(AbstractApiView):
+
+    CODE = 200
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
-        data = {}
+        self.TEMPLATE = "manage/modifyArticles.html"
 
         id = requests.GET.get('id')
 
@@ -69,19 +57,15 @@ class ModifyArticlesApi(AbstractApiView):
         categories = ArticleCategories.objects.all()
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 "data": data,
                 "cates": categories,
                 "form": form
-            },
-            "template": loader.get_template("manage/modifyArticles.html")
+            }
         }
 
     def post_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/200.html"
 
         res = ArticlesSerializer(data=requests.data, many=False)
         id = requests.POST.get('id')
@@ -101,12 +85,7 @@ class ModifyArticlesApi(AbstractApiView):
                 data['coverImage'] = requests.FILES.get('coverImage')
                 res.create(data)
 
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/200.html")
-        }
+        return
 
     def delete(self, requests):
         code = 0

@@ -1,40 +1,24 @@
 from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
+from apps.manager.utils.CommonApi import CommonApi
 from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 from apps.resume.models import Resume
 from apps.resume.serializers.Resume import ResumeSerializer
 
-class ExpResumekApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
-        exists = Resume.objects.filter(is_deleted=False)
+class ExpResumekApi(CommonApi):
 
-        return {
-            "code": code,
-            "message": message,
-            "data": [model_to_dict(exists[i]) for i in range(len(exists))],
-            "template": loader.get_template("manage/expResume.html")
-        }
+    TEMPLATE = "manage/expResume.html"
+    TARGET = Resume
 
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/modifyExpResume.html")
-        }
 
 class ModifyExpResumeApi(AbstractApiView):
+
+    CODE = 200
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/modifyExpResume.html"
         data = {}
 
         record_id = requests.GET.get('id')
@@ -45,15 +29,11 @@ class ModifyExpResumeApi(AbstractApiView):
                 data = exists[0]
 
         return {
-            "code": code,
-            "message": message,
-            "data": data,
-            "template": loader.get_template("manage/modifyExpResume.html")
+            "data": data
         }
 
     def post_solution(self, requests):
-        code = 200
-        message = "Success"
+        self.TEMPLATE = "manage/200.html"
 
         res = ResumeSerializer(data=requests.data, many=False)
         if res.is_valid(raise_exception=True):
@@ -63,12 +43,7 @@ class ModifyExpResumeApi(AbstractApiView):
             else:
                 res.create(res.data)
 
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("manage/200.html")
-        }
+        return
 
     def delete(self, requests):
         code = 0

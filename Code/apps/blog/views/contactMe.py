@@ -5,26 +5,8 @@ from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 
+
 class ContactMeApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("blog/contactMe.html")
-        }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("blog/contactMe.html")
-        }
+    CODE = 200
+    TEMPLATE = "blog/contactMe.html"

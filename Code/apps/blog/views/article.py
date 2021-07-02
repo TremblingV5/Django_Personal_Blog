@@ -1,4 +1,5 @@
 from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
+from utils.parser import parse_md
 from apps.articles.models import Articles
 from apps.resume.models import BasicInfo
 from django.http import HttpResponseRedirect
@@ -10,6 +11,9 @@ from django.forms.models import model_to_dict
 import markdown
 
 class ArticleApi(AbstractApiView):
+
+    CODE = 200
+
     def get(self, requests, article_id):
         code = 200
         message = "Success"
@@ -22,12 +26,7 @@ class ArticleApi(AbstractApiView):
 
         data = model_to_dict(exists[0])
 
-        data['content'] = markdown.markdown(data['content'], extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            'markdown.extensions.toc',
-            'mdx_math'
-        ])
+        data['content'] = parse_md(data['content'])
 
         if not len(exists) > 0:
             return HttpResponseRedirect('/blog/index/')
@@ -64,15 +63,3 @@ class ArticleApi(AbstractApiView):
             return HttpResponse(
                 loader.get_template("blog/article.html").render(result, requests)
             )
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("blog/article.html")
-        }

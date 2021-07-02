@@ -6,21 +6,18 @@ from django.forms.models import model_to_dict
 from django.http.request import QueryDict
 
 class AdminInfoApi(AbstractApiView):
+
+    CODE = 200
+    TEMPLATE = "manage/adminInfo.html"
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
         exists = AdminUser.objects.filter()
 
         return {
-            "code": code,
-            "message": message,
-            "data": model_to_dict(exists[0]),
-            "template": loader.get_template("manage/adminInfo.html")
+            "data": model_to_dict(exists[0])
         }
 
     def post_solution(self, requests):
-        code = 200
-        message = "Success"
 
         if requests.data.get('password') != requests.data.get('passwordAgain'):
             raise Exception("密码输入不一致")
@@ -39,8 +36,5 @@ class AdminInfoApi(AbstractApiView):
                 res.update(exists[0], res.data)
 
         return {
-            "code": code,
-            "message": message,
-            "data": model_to_dict(exists[0]),
-            "template": loader.get_template("manage/adminInfo.html")
+            "data": model_to_dict(exists[0])
         }

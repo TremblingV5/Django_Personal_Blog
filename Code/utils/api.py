@@ -1,48 +1,19 @@
+import traceback
 from rest_framework.views import APIView
 from django.http import HttpResponse, JsonResponse
-from PersonalBlog.settings import SITE_CONFIG
+from django.http import HttpResponseRedirect
+from PersonalBlog.settings import SITE_CONFIG, STATUS_INFO
+from django.template import loader
 
 class AbstractApiView(APIView):
-    """
-    不要重写 post, get两个方法
-    """
+    CODE = 500
+    TEMPLATE = "resume/base.html"
+
     def post(self, requests):
-        result = self.post_solution(requests)
-        type = requests.POST.get("type")
-        if type == "json":
-            return JsonResponse({
-                "code": result["code"],
-                "message": result["message"],
-                "data": result["data"]
-            })
-        else:
-            return HttpResponse(
-                result["template"].render({
-                    "code": result["code"],
-                    "message": result["message"],
-                    "data": result["data"],
-                    "config": SITE_CONFIG
-                }, requests)
-            )
+        return self.request_handle(self.post_solution, requests.POST, requests)
 
     def get(self, requests):
-        result = self.get_solution(requests)
-        type = requests.GET.get("type")
-        if type == "json":
-            return JsonResponse({
-                "code": result["code"],
-                "message": result["message"],
-                "data": result["data"]
-            })
-        else:
-            return HttpResponse(
-                result["template"].render({
-                    "code": result["code"],
-                    "message": result["message"],
-                    "data": result["data"],
-                    "config": SITE_CONFIG
-                }, requests)
-            )
+        return self.request_handle(self.get_solution, requests.GET, requests)
 
     def put(self, requests):
         pass
@@ -50,13 +21,34 @@ class AbstractApiView(APIView):
     def delete(self, requests):
         pass
 
+    def request_handle(self, method, methodType, request):
+        try:
+            result = method(request)
+        except Exception as e:
+            traceback.print_exc()
+            print(e.__str__())
+            self.CODE = 500
+            result = {}
+
+        reqType = methodType.get("type")
+        responseData = {
+            "code": self.CODE,
+            "message": STATUS_INFO[self.CODE],
+            "data": result["data"] if result not in [None, {}] else {},
+            "config": SITE_CONFIG
+        }
+
+        if reqType == "json":
+            return JsonResponse(self.data_wrap(responseData))
+        else:
+            return HttpResponse(
+                loader.get_template(self.TEMPLATE).render(self.data_wrap(responseData), request)
+            )
+
+    def data_wrap(self, responseData):
+        return responseData
+
     def post_solution(self, requests):
-        """
-        :param requests:
-        :return:
-            一个字典对象，包含如下索引：code、message、data、http_code、templates
-            需要将http返回的报文的状态码设置为http_code
-        """
         pass
 
     def get_solution(self, requests):

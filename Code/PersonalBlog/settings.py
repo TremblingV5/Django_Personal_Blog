@@ -230,3 +230,9 @@ SITE_CONFIG = {
     'title': 'R&D Developer',
     'wish': '想要白嫖'
 }
+
+STATUS_INFO = {
+    200: "success",
+    400: "not found",
+    500: "defeat"
+}

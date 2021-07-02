@@ -6,10 +6,11 @@ import markdown
 from apps.manager.forms.blogAboutMe import blogAboutMeMDEditorModleForm
 
 class BlogAboutMeApi(AbstractApiView):
-    def get_solution(self, requests):
-        code = 200
-        message = "Success"
 
+    CODE = 200
+    TEMPLATE = "manage/blogAboutMe.html"
+
+    def get_solution(self, requests):
         id = requests.GET.get('id')
         if id != None and id != "":
             exists = AboutMe.objects.filter(id=id, is_deleted=False)
@@ -28,20 +29,13 @@ class BlogAboutMeApi(AbstractApiView):
         form = blogAboutMeMDEditorModleForm(instance=data)
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 "data": data,
                 "form": form
-            },
-            "template": loader.get_template("manage/blogAboutMe.html")
+            }
         }
 
     def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
         form = AboutMeSerializer(data=requests.data, many=False)
         if form.is_valid(raise_exception=True):
             form.update(requests.POST.get('id'), form.data)
@@ -51,12 +45,9 @@ class BlogAboutMeApi(AbstractApiView):
         form = blogAboutMeMDEditorModleForm(instance=exists[0])
 
         return {
-            "code": code,
-            "message": message,
             "data": {
                 "data": exists[0],
                 "form": form
-            },
-            "template": loader.get_template("manage/blogAboutMe.html")
+            }
         }
 

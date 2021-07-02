@@ -3,27 +3,13 @@ from django.http import JsonResponse
 from django.template import loader
 from django.forms.models import model_to_dict
 
+
 class IndexApi(AbstractApiView):
+
+    CODE = 200
+    TEMPLATE = "blog/index.html"
+
     def get_solution(self, requests):
-        code = 200
-        message = "Success"
-
         return {
-            "code": code,
-            "message": message,
-            "data": [],
-            "template": loader.get_template("blog/index.html")
+            "data": []
         }
-
-    def post_solution(self, requests):
-        code = 200
-        message = "Success"
-
-
-        return {
-            "code": code,
-            "message": message,
-            "data": {},
-            "template": loader.get_template("blog/index.html")
-        }
-
