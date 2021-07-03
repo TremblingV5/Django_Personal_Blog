@@ -1,5 +1,5 @@
-import datetime
 from haystack import indexes
+
 from apps.articles.models import Articles
 
 

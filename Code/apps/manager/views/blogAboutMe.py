@@ -1,9 +1,8 @@
-from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
-from django.template import loader
-from apps.blog.serializers.AboutMe import AboutMeSerializer
 from apps.blog.models import AboutMe
-import markdown
+from apps.blog.serializers.AboutMe import AboutMeSerializer
 from apps.manager.forms.blogAboutMe import blogAboutMeMDEditorModleForm
+from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
+
 
 class BlogAboutMeApi(AbstractApiView):
 

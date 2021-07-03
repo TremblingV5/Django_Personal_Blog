@@ -7,7 +7,7 @@ from django.template import loader
 
 class AbstractApiView(APIView):
     CODE = 500
-    TEMPLATE = "resume/base.html"
+    TEMPLATE = "manage/404.html"
 
     def post(self, requests):
         return self.request_handle(self.post_solution, requests.POST, requests)
@@ -19,7 +19,7 @@ class AbstractApiView(APIView):
         pass
 
     def delete(self, requests):
-        pass
+        return self.request_handle(self.delete_solution, requests.POST, requests)
 
     def request_handle(self, method, methodType, request):
         try:
@@ -52,4 +52,7 @@ class AbstractApiView(APIView):
         pass
 
     def get_solution(self, requests):
+        pass
+
+    def delete_solution(self, requests):
         pass

@@ -1,11 +1,9 @@
-from utils.api import AbstractApiView
-from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 from django.forms.models import model_to_dict
 
-from apps.resume.models import BasicInfo
 from apps.articles.models import Articles
-from apps.articles.serializers.Articles import ArticlesSerializer
+from apps.resume.models import BasicInfo
+from utils.api import AbstractApiView
 
 
 class BlogAbstractApiView(AbstractApiView):

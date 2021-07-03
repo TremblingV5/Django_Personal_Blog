@@ -1,5 +1,4 @@
 from django.db import models
-from apps import articles
 from mdeditor.fields import MDTextField
 
 class Carousel(models.Model):

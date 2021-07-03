@@ -1,13 +1,14 @@
-from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
-from apps.articles.models import Articles
-from django.http import JsonResponse
-from django.template import loader
-from django.forms.models import model_to_dict
-from utils.paginator import ManagePagePagination
-from haystack.views import SearchView
-from django.http import Http404
-from django.core.paginator import InvalidPage, Paginator
 import json
+
+from django.core.paginator import InvalidPage, Paginator
+from django.forms.models import model_to_dict
+from django.http import Http404
+from django.http import JsonResponse
+from haystack.views import SearchView
+
+from apps.articles.models import Articles
+from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
+from utils.paginator import ManagePagePagination
 
 
 class TimelineApi(AbstractApiView):

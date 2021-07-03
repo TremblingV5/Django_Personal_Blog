@@ -1,7 +1,7 @@
-from django.urls import path, include
-from PersonalBlog import settings
-from apps.manager.views import index, login, adminInfo, resumeInfo, stackInfo, blogAboutMe, expResume, articleCategory
+from django.urls import path
+
 from apps.manager.views import articles, contactInfo
+from apps.manager.views import index, login, adminInfo, resumeInfo, stackInfo, blogAboutMe, expResume, articleCategory
 
 # path('settask/', SetTask.SetTaskAPI.as_view(), name='settask'),
 # path('download/<str:id>', files.FilesAPI.as_view(), name='download'),

@@ -1,5 +1,6 @@
-from apps.resume.models import CapabilityStack
 from rest_framework import serializers
+
+from apps.resume.models import CapabilityStack
 
 
 class CapabilityStackSerializer(serializers.ModelSerializer):

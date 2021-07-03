@@ -1,10 +1,10 @@
-from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
-from apps.manager.utils.CommonApi import CommonApi
 from django.http import JsonResponse
 from django.template import loader
-from django.forms.models import model_to_dict
+
 from apps.manager.models import ContactInfo
 from apps.manager.serializers.contactInfo import ContactInfoSerializer
+from apps.manager.utils.CommonApi import CommonApi
+from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
 
 
 class ContactInfoApi(CommonApi):

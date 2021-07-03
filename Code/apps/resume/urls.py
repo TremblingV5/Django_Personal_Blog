@@ -1,5 +1,5 @@
-from django.urls import path, include
-from PersonalBlog import settings
+from django.urls import path
+
 from apps.resume.views import index
 
 # path('settask/', SetTask.SetTaskAPI.as_view(), name='settask'),

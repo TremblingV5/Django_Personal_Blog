@@ -1,14 +1,14 @@
-from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
-from utils.parser import parse_md
-from apps.articles.models import Articles
-from apps.resume.models import BasicInfo
+from django.forms.models import model_to_dict
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.http import HttpResponse, JsonResponse
-from apps.articles.serializers.Articles import ArticlesSerializer
 from django.http import JsonResponse
 from django.template import loader
-from django.forms.models import model_to_dict
-import markdown
+
+from apps.articles.models import Articles
+from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
+from apps.resume.models import BasicInfo
+from utils.parser import parse_md
+
 
 class ArticleApi(AbstractApiView):
 

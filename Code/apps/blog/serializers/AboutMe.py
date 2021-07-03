@@ -1,5 +1,6 @@
-from apps.blog.models import AboutMe
 from rest_framework import serializers
+
+from apps.blog.models import AboutMe
 
 
 class AboutMeSerializer(serializers.ModelSerializer):

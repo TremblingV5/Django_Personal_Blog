@@ -1,12 +1,15 @@
-from django.db import models
-from utils import uploader
-from mdeditor.fields import MDTextField
-from django.core.files.storage import FileSystemStorage
-import os, time
-from PersonalBlog.settings import MediaPath, MEDIA_ROOT, CoverImages
+import os
+import time
 from hashlib import md5
+
+from django.core.files.storage import FileSystemStorage
+from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import Resize
+from mdeditor.fields import MDTextField
+
+from PersonalBlog.settings import MEDIA_ROOT
+
 
 class DataStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):

@@ -1,11 +1,12 @@
-from utils.api import AbstractApiView
-from django.http import HttpResponse, JsonResponse
-from django.http import HttpResponseRedirect
-from PersonalBlog.settings import SITE_CONFIG
-from django.core.cache import cache, caches
-from rest_framework import exceptions
+import datetime
+import time
 from hashlib import md5
-import time, datetime
+
+from django.core.cache import caches
+from django.http import HttpResponseRedirect
+
+from utils.api import AbstractApiView
+
 
 class ManageAbstractApiView(AbstractApiView):
     """

@@ -1,6 +1,5 @@
 from django import forms
 
-from mdeditor.fields import MDTextFormField
 from apps.blog.models import AboutMe
 
 

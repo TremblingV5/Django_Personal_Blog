@@ -1,9 +1,9 @@
-from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
-from django.template import loader
-from apps.manager.serializers.adminInfo import AdminUserSerializer
-from apps.manager.models import AdminUser
 from django.forms.models import model_to_dict
-from django.http.request import QueryDict
+
+from apps.manager.models import AdminUser
+from apps.manager.serializers.adminInfo import AdminUserSerializer
+from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
+
 
 class AdminInfoApi(AbstractApiView):
 

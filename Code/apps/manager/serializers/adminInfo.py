@@ -1,5 +1,6 @@
-from apps.manager.models import AdminUser
 from rest_framework import serializers
+
+from apps.manager.models import AdminUser
 from utils.hasher import get_md5
 
 

@@ -1,11 +1,10 @@
-from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
-from utils.parser import parse_md
-from apps.blog.models import AboutMe
-from apps.articles.models import Articles
-from django.http import JsonResponse
-from django.template import loader
 from django.forms.models import model_to_dict
 from imagekit.models.fields.files import ProcessedImageFieldFile
+
+from apps.articles.models import Articles
+from apps.blog.models import AboutMe
+from apps.blog.utils.api import BlogAbstractApiView as AbstractApiView
+from utils.parser import parse_md
 
 
 class AboutMeApi(AbstractApiView):

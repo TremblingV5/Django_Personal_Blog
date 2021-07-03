@@ -1,13 +1,16 @@
-from rest_framework.views import APIView
+import datetime
+import time
+
+from django.conf import settings
+from django.core.cache import caches
 from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
-from django.core.cache import cache, caches
+from rest_framework.views import APIView
+
 from apps.manager.models import AdminUser
 from utils.hasher import get_md5
-import time
-import datetime
-from django.conf import settings
+
 
 class LoginApi(APIView):
     def get(self, requests):

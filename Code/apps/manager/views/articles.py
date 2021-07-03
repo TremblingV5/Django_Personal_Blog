@@ -1,12 +1,13 @@
-from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
-from django.http import JsonResponse
-from django.template import loader
 from django.forms.models import model_to_dict
+from django.http import JsonResponse
+
+from apps.articles.models import ArticleCategories
 from apps.articles.models import Articles
 from apps.articles.serializers.Articles import ArticlesSerializer
 from apps.manager.forms.articles import ArticlesMDEditorModleForm
-from apps.articles.models import ArticleCategories
+from apps.manager.utils.api import ManageAbstractApiView as AbstractApiView
 from utils.paginator import ManagePagePagination
+
 
 class ArticlesApi(AbstractApiView):
 

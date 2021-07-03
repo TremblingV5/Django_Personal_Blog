@@ -1,22 +1,16 @@
-from utils.api import AbstractApiView
-from django.template import loader
 from apps.resume.models import BasicInfo, Resume, CapabilityStack
 from apps.resume.serializers.BasicInfo import BasicInfoSerializer
-from apps.resume.serializers.Resume import ResumeSerializer
 from apps.resume.serializers.CapabilityStack import CapabilityStackSerializer
+from apps.resume.serializers.Resume import ResumeSerializer
+from utils.api import AbstractApiView
 
-from utils.modelsUtil.getter import getter
 
 class BasicInfoAPI(AbstractApiView):
 
     CODE = 200
+    TEMPLATE = "resume/base.html"
 
     def data_wrap(self, responseData):
-        data = {}
-
-        g = getter("articles.models", "Articles")
-        print(g.module.objects.all())
-
         try:
             queryset = BasicInfo.objects.filter(is_using=1, is_deleted=False)
             result = BasicInfoSerializer(queryset, many=True)

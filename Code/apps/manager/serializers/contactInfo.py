@@ -1,5 +1,6 @@
-from apps.manager.models import ContactInfo
 from rest_framework import serializers
+
+from apps.manager.models import ContactInfo
 
 
 class ContactInfoSerializer(serializers.ModelSerializer):

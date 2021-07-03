@@ -1,5 +1,6 @@
-from apps.resume.models import BasicInfo
 from rest_framework import serializers
+
+from apps.resume.models import BasicInfo
 
 
 class BasicInfoSerializer(serializers.ModelSerializer):

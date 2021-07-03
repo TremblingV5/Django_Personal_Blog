@@ -1,5 +1,6 @@
-from apps.manager.utils.api import AbstractApiView
 from django.forms.models import model_to_dict
+
+from apps.manager.utils.api import AbstractApiView
 
 
 class CommonApi(AbstractApiView):
