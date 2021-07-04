@@ -35,7 +35,6 @@ class TimelineApi(AbstractApiView):
                 data[i]['coverImage'] = data[i]['coverImage'].url.replace("/resources", "")
                 data[i]['create_time'] = exists[i].create_time
                 data[i]['create_time_formatted'] = exists[i].create_time.strftime("%Y-%m-%d")
-
         return {
             "data": {
                 "data": data,

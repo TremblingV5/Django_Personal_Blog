@@ -30,15 +30,14 @@ class AbstractApiView(APIView):
             self.CODE = 500
             result = {}
 
-        reqType = methodType.get("type")
+        self.reqType = methodType.get("type")
         responseData = {
             "code": self.CODE,
             "message": STATUS_INFO[self.CODE],
             "data": result["data"] if result not in [None, {}] else {},
             "config": SITE_CONFIG
         }
-
-        if reqType == "json":
+        if self.reqType == "json":
             return JsonResponse(self.data_wrap(responseData))
         else:
             return HttpResponse(
@@ -46,7 +45,7 @@ class AbstractApiView(APIView):
             )
 
     def data_wrap(self, responseData):
-        return responseData
+        return
 
     def post_solution(self, requests):
         pass
