@@ -10,6 +10,9 @@ while ! nc -z db 3306 ; do
     echo "Waiting for the MySQL Server"
     sleep 3
 done
+
+sh -c '/bin/echo -e "y" | python manage_prod.py rebuild_index'
+
 python manage_prod.py collectstatic --noinput&&
 python manage_prod.py makemigrations&&
 python manage_prod.py migrate&&
