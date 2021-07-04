@@ -3,16 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	{% load static %}
+	{% load compress %}
 	<title>zhengfei.xin</title>
 	<meta name="viewport" content="width=600" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="format-detection" content="telephone=no" />
 
+
+	{% compress css %}
 	<link rel="stylesheet" type="text/css" href="{%static 'css/fonts_ubuntu_300_700.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{%static 'css/colorbox.css' %}" />
-	<script type="text/javascript" src="{%static 'js/html5shiv.js' %}"></script>
+	{% endcompress %}
 	<!--    <link rel="apple-touch-icon" href="apple-touch-icon.png" />-->
 	<!--    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />-->
 </head>
@@ -215,8 +218,11 @@
 	<!-- <section id="overview" class="step" data-x="0" data-y="-600" data-rotate-x="10" data-z="1000"></section> -->
 </div>
 </body>
-<script type="text/javascript" src={% static 'js/jquery.min.js' %}></script>
-<script type="text/javascript" src={% static 'js/impress.js' %}></script>
+{% compress js %}
+<script type="text/javascript" src="{% static 'js/html5shiv.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/impress.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/jquery.colorbox-min.js' %}"></script>
-<script type="text/javascript" src={% static 'js/script.js' %}></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+{% endcompress %}
 </html>

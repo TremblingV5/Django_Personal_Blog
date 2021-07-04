@@ -56,11 +56,20 @@ INSTALLED_APPS = [
     'haystack',
     'imagekit',
     'mdeditor',
+    'compressor',
     'apps.articles',
     'apps.blog',
     'apps.resume',
     'apps.manager'
 ]
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'compressor.finders.CompressorFinder'
+)
+
+COMPRESS_ENABLED = True
 
 HAYSTACK_CONNECTIONS = {
     'default': {

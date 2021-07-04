@@ -11,6 +11,7 @@ while ! nc -z db 3306 ; do
     sleep 3
 done
 python manage_prod.py collectstatic --noinput&&
+python manage_prod.py compress --force&&
 python manage_prod.py makemigrations&&
 python manage_prod.py migrate&&
 /usr/local/bin/uwsgi --ini /var/www/html/Code/uwsgi.ini&&

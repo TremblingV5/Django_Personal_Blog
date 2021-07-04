@@ -841,7 +841,9 @@
     margin-top: 5px;
     width: 310px;
     min-height: 230px;
+    /*
     background-image: url("images/personal-info-sep.png");
+    */
     background-repeat: no-repeat;
     background-position: 0 44px;
     padding: 20px 0 0 20px;
@@ -900,7 +902,7 @@
     cursor: pointer;
     float: left;
     color: #fff;
-    background-image: url("images/icon-set.png");
+    /*background-image: url("images/icon-set.png");*/
     background-repeat: no-repeat;
     background-position: 20px -290px;
   }
@@ -917,7 +919,9 @@
     margin-right: 2px;
   }
   section.profile_container ul.social li a {
+    /*
     background-image: url("images/socialis.png");
+    */
     width: 45px;
     height: 45px;
     display: block;
@@ -1535,7 +1539,7 @@
   section.feature_container ul.feature-list li {
     margin: 15px 0 0 0;
     padding: 0 0 0 40px;
-    background-image: url("images/icon-set.png");
+    /*background-image: url("images/icon-set.png");*/
     background-repeat: no-repeat;
     background-position: 2px -400px;
   }
