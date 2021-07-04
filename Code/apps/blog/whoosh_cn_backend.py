@@ -259,7 +259,8 @@ class WhooshSearchBackend(BaseSearchBackend):
         # Per the Whoosh mailing list, if wiping out everything from the index,
         # it's much more efficient to simply delete the index files.
         if self.use_file_storage and os.path.exists(self.path):
-            shutil.rmtree(self.path)
+            for file in os.listdir(self.path):
+                os.remove(os.path.join(self.path, file))
         elif not self.use_file_storage:
             self.storage.clean()
 
