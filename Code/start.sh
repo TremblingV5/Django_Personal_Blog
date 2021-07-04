@@ -13,7 +13,6 @@ done
 python manage_prod.py collectstatic --noinput&&
 python manage_prod.py makemigrations&&
 python manage_prod.py migrate&&
-sh -c '/bin/echo -e "y" | python manage_prod.py rebuild_index'&&
 /usr/local/bin/uwsgi --ini /var/www/html/Code/uwsgi.ini&&
 tail -f /dev/null
 
