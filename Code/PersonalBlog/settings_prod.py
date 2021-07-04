@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'haystack',
     'imagekit',
     'mdeditor',
-    'compressor',
     'apps.articles',
     'apps.blog',
     'apps.resume',
