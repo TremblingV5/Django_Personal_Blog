@@ -63,14 +63,6 @@ INSTALLED_APPS = [
     'apps.manager'
 ]
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'compressor.finders.CompressorFinder'
-)
-
-COMPRESS_ENABLED = True
-
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'apps.blog.whoosh_cn_backend.WhooshEngine',
