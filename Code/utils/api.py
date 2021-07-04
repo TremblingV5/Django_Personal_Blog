@@ -45,7 +45,7 @@ class AbstractApiView(APIView):
             )
 
     def data_wrap(self, responseData):
-        return
+        return responseData
 
     def post_solution(self, requests):
         pass
