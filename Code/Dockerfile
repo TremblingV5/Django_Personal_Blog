@@ -26,6 +26,8 @@ RUN /bin/bash ./create_resources_path.sh
 RUN chmod -R 777 /var/www/html/Code/resources
 RUN chmod -R 777 /var/www/html/Code/PersonalBlog/whoosh_index
 
+RUN chown -R www-data:www-data /var/www/html/Code/PersonalBlog/whoosh_index
+
 # 更新pip版本
 RUN /usr/local/bin/python -m pip install --upgrade pip
 
