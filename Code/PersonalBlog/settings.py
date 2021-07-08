@@ -60,7 +60,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 # HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-# HAYSTACK_SIGNAL_PROCESSOR = 'apps.blog.HaystackProcessor.Processor'
+HAYSTACK_SIGNAL_PROCESSOR = 'apps.blog.HaystackProcessor.Processor'
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES':
@@ -159,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

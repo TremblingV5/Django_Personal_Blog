@@ -9,7 +9,10 @@ class CommonApi(AbstractApiView):
     TARGET = None
 
     def get_solution(self, requests):
-        exists = self.TARGET.objects.filter(is_deleted=False)
+        try:
+            exists = self.TARGET.objects.filter(is_deleted=False)
+        except:
+            exists = self.TARGET.objects.all()
         return {
             "data": [model_to_dict(exists[i]) for i in range(len(exists))]
         }

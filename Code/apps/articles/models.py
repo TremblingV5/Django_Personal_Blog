@@ -42,5 +42,5 @@ class Articles(CommonModel):
     )
 
 
-class ArticleCategories(models.Model):
+class ArticleCategories(CommonModel):
     name = models.CharField(max_length=10)
