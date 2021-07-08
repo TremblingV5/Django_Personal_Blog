@@ -118,26 +118,30 @@
             },
             method: "get",
             success:function(result){
-                console.log(result['data']['data'][0]);
-                for (var i = 0; i < result['data']['data'].length; i ++){
-                    var newElements = "<div class='jesus'><img src='../../resources"
-                            + result['data']['data'][i]['coverImage']
-                            +  "' alt= '"
-                            + result['data']['data'][i]['title']
-                            + "' style='width:100%'/><div class='sinfo'><div class='sinfo-left'><h3>date</h3><span>"
-                            + result['data']['data'][i]['create_time_formatted']
-                            + "</span></div><div class='sinfo-right'><h4><a href='/blog/article/"
-                            + result['data']['data'][i]['id']
-                            + "'>"
-                            + result['data']['data'][i]['title']
-                            + "</a></h4><p>"
-                            + result['data']['data'][i]['introduction']
-                            + "</p></div><div class='clear'> </div></div></div><h6 style='width:100%'></h6>"
-                    $('#content').append(newElements);
+                if (result['code'] == 200){
+                    for (var i = 0; i < result['data']['data'].length; i ++){
+                        var newElements = "<div class='jesus'><img src='../../resources"
+                                + result['data']['data'][i]['coverImage']
+                                +  "' alt= '"
+                                + result['data']['data'][i]['title']
+                                + "' style='width:100%'/><div class='sinfo'><div class='sinfo-left'><h3>date</h3><span>"
+                                + result['data']['data'][i]['create_time_formatted']
+                                + "</span></div><div class='sinfo-right'><h4><a href='/blog/article/"
+                                + result['data']['data'][i]['id']
+                                + "'>"
+                                + result['data']['data'][i]['title']
+                                + "</a></h4><p>"
+                                + result['data']['data'][i]['introduction']
+                                + "</p></div><div class='clear'> </div></div></div><h6 style='width:100%'></h6>"
+                        $('#content').append(newElements);
+                    }
+                }else{
+                    $('#load').html('<a>已经到底啦,不信你再点一次</a>');
                 }
+
             },
             error: function (){
-                $('#load').html('<a>已经到底啦</a>');
+                $('#load').html('<a>已经到底啦,不信你再点一次</a>');
             }
         });
     });

@@ -154,23 +154,26 @@ $(function () {
             },
             method: "get",
             success:function(result){
-                for (var i = 0; i < result['data']['data'].length; i ++){
-                    var newElements = "<div class='portfolio "
-                        + result['data']['data'][i]['cate_id']
-                        + "' data-cat='"
-                        + result['data']['data'][i]['cate_id']
-                        + "'><div class='portfolio-wrapper'><a  href='"
-                        + "/blog/article/"
-                        + result['data']['data'][i]['id']
-                        + "'><img src='../../resources/"
-                        + result['data']['data'][i]['coverImage']
-                        + "'  alt='Image 1' /><div class='desc'><h2 style='color: rgb(239, 112, 96);'>"
-                        + result['data']['data'][i]['title']
-                        + "</h2><h3>"
-                        //+ result['data']['data'][i]['create_time']
-                        + "</h3></div></a></div></div>";
-                    $('#portfoliolist').append(newElements);
+                if (result['code'] == 200){
+                    console.log(result['data']['data'])
+                    for (var i = 0; i < result['data']['data'].length; i ++){
+                        var newElements = "<div class='portfolio "
+                            + result['data']['data'][i]['cate_id']
+                            + "' data-cat='"
+                            + result['data']['data'][i]['cate_id']
+                            + "'><div class='portfolio-wrapper'><a href='/blog/article/"
+                            + result['data']['data'][i]['id']
+                            + "'><img src='../../resources/"
+                            + result['data']['data'][i]['coverImage']
+                            + "' alt='Image 1' /><div class='desc'><h2 style='color: rgb(239, 112, 96);'>"
+                            + result['data']['data'][i]['title']
+                            + "</h2><h3></h3></div></a></div></div>"
+                        $('#portfoliolist').append(newElements);
+                    }
+                }else{
+                    $('#load').html('<a>已经到底啦,不信你再点一次</a>');
                 }
+
                 $("span.filter.active").click();
             },
             error: function (){

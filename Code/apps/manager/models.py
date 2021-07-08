@@ -1,8 +1,7 @@
 from django.db import models
+from utils.CommonModel import CommonModel
 
-
-class AdminUser(models.Model):
-    id = models.AutoField(primary_key=True)
+class AdminUser(CommonModel):
     username = models.CharField(max_length=20)
     password = models.TextField()
     name = models.CharField(max_length=20)
@@ -10,11 +9,7 @@ class AdminUser(models.Model):
     email = models.TextField()
 
 
-class ContactInfo(models.Model):
-    id = models.AutoField(primary_key=True)
+class ContactInfo(CommonModel):
     name = models.TextField()
     email = models.TextField()
     message = models.TextField()
-
-    is_viewed = models.BooleanField()
-    is_deleted = models.BooleanField()
