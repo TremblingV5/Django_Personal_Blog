@@ -2,6 +2,8 @@ from apps.resume.models import BasicInfo, Resume, CapabilityStack
 from apps.resume.serializers.BasicInfo import BasicInfoSerializer
 from apps.resume.serializers.CapabilityStack import CapabilityStackSerializer
 from apps.resume.serializers.Resume import ResumeSerializer
+from apps.articles.models import Articles
+from apps.articles.serializers.Articles import ArticlesSerializer
 from utils.api import AbstractApiView
 
 
@@ -47,11 +49,24 @@ class BasicInfoAPI(AbstractApiView):
         except:
             stackInfo = {}
 
+        try:
+            queryset = Articles.objects.filter(is_using=1, is_deleted=False).order_by('-update_time')
+            if len(queryset) > 8:
+                queryset = queryset[:8]
+            result = ArticlesSerializer(queryset, many=True)
+            recentFiles = result.data
+            for i in range(len(recentFiles)):
+                recentFiles[i]["update_time_formatted"] = recentFiles[i]["update_time"][:10]
+        except Exception as e:
+            print(e.__str__())
+            recentFiles = {}
+
         responseData["data"] = {
             "about": aboutMe,
             'eduResume': eduResume,
             'jobResume': jobResume,
-            'stackInfo': stackInfo
+            'stackInfo': stackInfo,
+            'recentFiles': recentFiles
         }
 
         return responseData

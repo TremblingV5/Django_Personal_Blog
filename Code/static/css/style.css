@@ -2778,3 +2778,29 @@
     page-break-after: avoid;
   }
 }
+
+.recent_articles li {
+    margin-bottom: 10px;
+}
+
+.recent_articles li a {
+    text-decoration: none;
+    color: #777777;
+}
+
+.recent_articles li a:hover {
+    text-decoration: underline;
+    color: #e36009;
+}
+
+.recent_articles li a font:hover {
+    text-decoration: underline;
+}
+
+.recent_articles li a .title {
+    float: left;
+}
+
+.recent_articles li a .date {
+    float: right;
+}

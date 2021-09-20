@@ -307,11 +307,20 @@
 </body>
 <script>
 	document.addEventListener('visibilitychange', function () {
+		face1 = '(｡・`ω´･)~';
+		face2 = '(oﾟωﾟo)~';
+		normal_title = document.title;
+		console.log(normal_title.indexOf(face1));
+		if (normal_title.indexOf(face1) != -1) {
+			normal_title = normal_title.replace(face1, '');
+		}
+		if (normal_title.indexOf(face2) != -1) {
+			normal_title = normal_title.replace(face2, '');
+		}
 		if (document.visibilityState == 'hidden') {
-			normal_title = document.title;
-			document.title = ' (｡・`ω´･) ' + normal_title;
+			document.title = face1 + normal_title;
 		} else {
-			document.title = '  (oﾟωﾟo) ' + normal_title;
+			document.title = face2 + normal_title;
 			setTimeout(function (){
 				document.title = normal_title;
 			}, 1000);

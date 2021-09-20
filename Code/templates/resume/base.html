@@ -172,11 +172,13 @@
 	<!--*** Portfolio 1/2 ***-->
 	<section class="portfolio_container portfolio1 cover step" id="portfolio" data-x="-300" data-y="-1200" data-z="-3000">
 		<h1 class="cover"><span class="h1-text fg-bgc">Recent Articles</span><span class="h1-corner fg-bdc"></span></h1>
-		<ul class="feature-list">
-			<li style="margin-bottom:3%">
-				还没有想好这个页面怎么写
-			</li>
-		</ul>
+		<section class="recent_articles">
+			<ul>
+				{% for item in data.recentFiles %}
+				<li><h3><a href="{% url 'article' item.id  %}">{{ item.title }}<font class="date">{{ item.update_time_formatted }}</font></a></h3></li>
+				{% endfor %}
+			</ul>
+		</section>
 	</section>
 
 
