@@ -32,5 +32,7 @@ class ModifyApi(AbstractApiView):
         exists = self.TARGET.objects.filter(id=requests.POST.get('id'))
         if len(exists) > 0:
             exists[0].is_deleted = True
+            exists[0].is_using = False
+            exists[0].in_turn = False
             exists[0].save()
         return
