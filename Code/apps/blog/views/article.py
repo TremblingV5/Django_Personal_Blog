@@ -58,6 +58,9 @@ class ArticleApi(AbstractApiView):
         }
 
         if t == "json":
+            result["data"]["coverImage"] = result["data"]["coverImage"].url
+            for item in result["recent_footer"]:
+                item["coverImage"] = item["coverImage"].url
             return JsonResponse(result)
         else:
             return HttpResponse(
