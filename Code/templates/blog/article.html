@@ -24,12 +24,35 @@
         <div class="banner">
             <img src="../../resources/{{ data.coverImage }}" alt="" />
         </div>
-        <div class="markdown">
+        <div class="markdown" style="float:left">
             {{ data.content | safe }}
+        </div>
+        <div class="grid-right" style="float:left">
+            <div class="side-bar">
+                <div class="grid-right-headings">
+                    <h2><a>INTRODUCTION</a></h2>
+                    <h6> </h6>
+                    <div class="clear"> </div>
+                </div>
+                <p style="padding:0px;">{{ data.introduction }}</p>
+<!--                <div class="grid-right-headings">-->
+<!--                    <h2><a href="#">categories</a></h2>-->
+<!--                    <h6> </h6>-->
+<!--                    <div class="clear"> </div>-->
+<!--                </div>-->
+<!--                <div id="article-category" style="-->
+<!--                    color: red;-->
+<!--                ">-->
+
+<!--                </div>-->
+            </div>
         </div>
     </div>
 </div>
-
+<!--<script>-->
+<!--    var toc = $(".toc").clone();-->
+<!--    $("#article-category").append(toc);-->
+<!--</script>-->
 {% endblock %}
 {% block recent %}
 {% endblock %}

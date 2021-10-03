@@ -290,7 +290,7 @@
         firetop.onclick = function () {
             var scrolltop = window.scrollY;
             var timer = setInterval(function () {//定时器启动
-                scrolltop -= 50;
+                scrolltop -= document.body.clientHeight / 50;
                 if (scrolltop <= -window.innerHeight) {
                     firetop.style.display = 'none'; //小火箭隐藏
                     firetop.style.animation = '';   //清除动画
@@ -298,7 +298,7 @@
                     clearInterval(timer);
                 }
                 window.scrollTo(0, scrolltop);//设置滚动条距离顶部的距离
-            }, 30);
+            }, 20);
             this.style = 'animation:move 2s steps(4, end) infinite;'//给动画
         }
 
