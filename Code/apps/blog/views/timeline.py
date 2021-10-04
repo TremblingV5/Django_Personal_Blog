@@ -15,7 +15,7 @@ class TimelineApi(AbstractApiView):
 
     CODE = 200
     TEMPLATE = "blog/timeline.html"
-    # TODO: 文章列表页把传输的文章详情给去掉，太占地方
+
     def get_solution(self, requests):
         paginator = ManagePagePagination()
         exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
@@ -35,6 +35,12 @@ class TimelineApi(AbstractApiView):
                 data[i]['coverImage'] = data[i]['coverImage'].url.replace("/resources", "")
                 data[i]['create_time'] = exists[i].create_time
                 data[i]['create_time_formatted'] = exists[i].create_time.strftime("%Y-%m-%d")
+
+        for item in [data, recent]:
+            for i in range(len(item)):
+                item[i]["content"] = ""
+                item[i]["introduction"] = ""
+
         return {
             "data": {
                 "data": data,

@@ -17,7 +17,6 @@ class BlogAbstractApiView(AbstractApiView):
         except:
             slider = []
 
-        recentArticles = [[], []]
         try:
             exists = Articles.objects.filter(is_deleted=False).order_by("-update_time")
             recent = [model_to_dict(exists[i]) for i in range(len(exists))]
@@ -45,11 +44,11 @@ class BlogAbstractApiView(AbstractApiView):
             recent_footer = []
 
         responseData.update({
-            "slider": self.replace_not_json(slider),
-            "recentA": self.replace_not_json(recentArticles[0]),
-            "recentB": self.replace_not_json(recentArticles[1]),
+            "slider": self.clear(slider),
+            "recentA": self.clear(recentArticles[0]),
+            "recentB": self.clear(recentArticles[1]),
             "intro": self_introduction,
-            "recent_footer": self.replace_not_json(recent_footer[:5]),
+            "recent_footer": self.clear(recent_footer[:5]),
             "basic": {
                 "phone": basic.mobile,
                 "email": basic.email,
@@ -72,9 +71,13 @@ class BlogAbstractApiView(AbstractApiView):
     def get_solution(self, requests):
         pass
 
-    def replace_not_json(self, data):
+    def clear(self, data):
         if self.reqType == "json":
             for item in data:
                 if "coverImage" in item:
                     item["coverImage"] = item['coverImage'].url.replace("/resources", "")
+
+        for item in data:
+            del item['content']
+
         return data
