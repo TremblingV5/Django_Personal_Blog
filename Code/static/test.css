@@ -540,3 +540,93 @@
 .markdown p span  {
     font-size: 20px;
 }
+
+.markdown {
+    counter-reset: h1
+}
+.markdown h1 {
+    counter-reset: h2
+}
+.markdown h2 {
+    counter-reset: h3
+}
+        .markdown h3 {
+        counter-reset: h4
+        }
+        .markdown h4 {
+        counter-reset: h5
+        }
+        .markdown h5 {
+        counter-reset: h6
+        }
+        /** put counter result into headings */
+        .markdown h2:before {
+        counter-increment: h2;
+        content: counter(h2) ". "
+        }
+        .markdown h3:before {
+        counter-increment: h3;
+        content: counter(h2) "." counter(h3) ". "
+        }
+        .markdown h4:before {
+        counter-increment: h4;
+        content: counter(h2) "." counter(h3) "." counter(h4) ". "
+        }
+        .markdown h5:before {
+        counter-increment: h5;
+        content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "
+        }
+        .markdown h6:before {
+        counter-increment: h6;
+        content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) ". "
+        }
+
+/* toc中h2 */
+        .toc>ul>li>a {
+            counter-reset: toc-h2;
+        }
+
+        .toc>ul>li>ul>li>a:before {
+            counter-increment: toc-h2;
+            content: counter(toc-h2) ". ";
+        }
+
+        /* toc中h3 */
+        .toc>ul>li>ul>li>a {
+            counter-reset: toc-h3;
+        }
+
+        .toc>ul>li>ul>li>ul>li>a:before {
+            counter-increment: toc-h3;
+            content: counter(toc-h2) "." counter(toc-h3) ". ";
+        }
+
+        /* toc中h4 */
+        .toc>ul>li>ul>li>ul>li>a {
+            counter-reset: toc-h4;
+        }
+
+        .toc>ul>li>ul>li>ul>li>ul>li>a:before {
+            counter-increment: toc-h4;
+            content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) ". ";
+        }
+
+        /* toc中h5 */
+        .toc>ul>li>ul>li>ul>li>ul>li>a {
+            counter-reset: toc-h5;
+        }
+
+        .toc>ul>li>ul>li>ul>li>ul>li>ul>li>a:before {
+            counter-increment: toc-h5;
+            content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) "." counter(toc-h5) ". ";
+        }
+
+        /* toc中h6 */
+        .toc>ul>li>ul>li>ul>li>ul>li>ul>li>a {
+            counter-reset: toc-h6;
+        }
+
+        .toc>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>a:before {
+            counter-increment: toc-h6;
+            content: counter(toc-h2) "." counter(toc-h3) "." counter(toc-h4) "." counter(toc-h5) "." counter(toc-h6) ". ";
+        }
