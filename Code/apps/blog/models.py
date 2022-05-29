@@ -1,6 +1,6 @@
 from django.db import models
 from utils.CommonModel import CommonModel
-from mdeditor.fields import MDTextField
+from utils.mdeditor.fields import MDTextField
 
 
 class AboutMe(CommonModel):

@@ -7,7 +7,7 @@ from django.db import models
 from utils.CommonModel import CommonModel
 from imagekit.models import ProcessedImageField
 from imagekit.processors import Resize
-from mdeditor.fields import MDTextField
+from utils.mdeditor.fields import MDTextField
 
 from PersonalBlog.settings import MEDIA_ROOT
 

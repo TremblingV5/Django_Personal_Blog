@@ -26,7 +26,7 @@ urlpatterns = [
     path('resume/', include('apps.resume.urls')),
     path('blog/', include('apps.blog.urls')),
     path('article/', include('apps.articles.urls')),
-    path('mdeditor/', include('mdeditor.urls'))
+    path('mdeditor/', include('utils.mdeditor.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'haystack',
     'imagekit',
-    'mdeditor',
+    'utils.mdeditor',
     'apps.articles',
     'apps.blog',
     'apps.resume',
@@ -222,7 +222,14 @@ MDEDITOR_CONFIGS = {
         'sequence': True,  # 是否开启序列图功能
         'watch': True,  # 实时预览
         'lineWrapping': True,  # 自动换行
-        'lineNumbers': True  # 行号
+        'lineNumbers': True,  # 行号
+        'OSS': {
+            "usage": False,
+            "OSS_ACCESS_KEY_ID": "",
+            "OSS_ACCESS_KEY_SECRET": "",
+            "OSS_ENDPOINT": "",
+            "OSS_BUCKET_NAME": ""
+        }
     }
 }
 
