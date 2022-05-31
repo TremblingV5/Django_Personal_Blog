@@ -40,10 +40,12 @@
 		}
 	}
     </style>
+	<script type='text/javascript' src="{% static 'mermaid/mermaid.min.js' %}"></script>
 	<link href="{% static 'css/fontOpenSans.css' %}" rel='stylesheet' type='text/css'/>
 	<link href="{% static 'css/fontOpenSans.400.300.600.700.css' %}" rel='stylesheet' type='text/css'>
 	<link href="{% static 'blog/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
 	<link href="{% static 'test.css' %}"  rel="stylesheet" type="text/css"/>
+	<link href="{% static 'mermaid/mermaid.css '%}" rel="stylesheet" text="text/css" />
 	<link href="{% static 'blog/css/camera.css' %}" rel="stylesheet" type="text/css" media="all" />
 	<!-- jQuery -->
 	<!--start slider-->
@@ -136,6 +138,11 @@
 		});
 	</script>
 	<script type="text/javascript" async src="{% static 'MathJax.TeX-MML-AM_CHTML.js' %}"></script>
+	<style>
+		.wrap {
+			font-family: 'bebasregular';
+		}
+	</style>
 	{% block head %}{% endblock %}
 </head>
 <body>

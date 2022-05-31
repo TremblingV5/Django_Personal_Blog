@@ -6,4 +6,5 @@ def parse_md(text):
         'markdown.extensions.codehilite',
         'markdown.extensions.toc',
         'mdx_math',
+        'md_mermaid'
     ])
